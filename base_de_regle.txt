@@ -1,0 +1,33 @@
+SI livre=1984 ALORS auteur=George_Orwell
+SI livre=Orgueil_et_Prejuges ALORS auteur=Jane_Austen
+SI livre=Shining ALORS auteur=Stephen_King
+SI livre=Ca ALORS auteur=Stephen_King
+SI livre=J_irai_cracher_sur_vos_tombes ALORS auteur=Boris_Vian
+SI livre=Voyage_au_centre_de_la_terre ALORS auteur=Jules_Vernes
+SI livre=Bonjour_Tristesse ALORS auteur=Francoise_Sagan
+SI livre=Le_Horla ALORS auteur=Guy_de_Maupassant
+SI livre=Therese_Raquin ALORS auteur=Emile_Zola
+SI livre=1984 ALORS style=SF
+SI livre=Orgueil_et_Prejuges ALORS style=romance
+SI livre=Shining ALORS style=thriller
+SI livre=Ca ALORS style=horreur
+SI livre=J_irai_cracher_sur_vos_tombes ALORS style=thriller
+SI livre=Voyage_au_centre_de_la_terre ALORS style=aventure
+SI livre=Bonjour_Tristesse ALORS style=drame
+SI livre=Le_Horla ALORS style=fantastique
+SI livre=Therese_Raquin ALORS style=drame
+SI style=aventure auteur=Jules_Vernes ALORS livre=Voyage_au_centre_de_la_terre
+SI style=thriller auteur=Stephen_King ALORS livre=Shining
+SI style=SF auteur=George_Orwell ALORS livre=1984
+SI style=romance auteur=Jane_Austen ALORS livre=Orgueil_et_Prejuges
+SI style=horreur auteur=Stephen_King ALORS livre=Ca
+SI style=thriller auteur=Boris_Vian ALORS livre=J_irai_cracher_sur_vos_tombes
+SI theme=vengeance auteur=Boris_Vian ALORS livre=J_irai_cracher_sur_vos_tombes
+SI theme=clown auteur=Stephen_King ALORS livre=Ca
+SI theme=famille theme=folie auteur=Stephen_King ALORS livre=Shining
+SI theme=jalousie theme=folie auteur=Emile_Zola ALORS livre=Therese_Raquin
+SI theme=amour auteur=Jane_Austen ALORS livre=Orgueils_et_Prejuges
+SI theme=dictature auteur=Jules_Vernes ALORS livre=1984
+SI theme=voyage auteur=Jules_Vernes ALORS livre=Voyage_au_centre_de_la_terre
+SI theme=jalousie theme=famille auteur=Francoise_Sagan ALORS livre=Bonjour_Tristesse
+SI theme=folie auteur=Guy_de_Maupassant ALORS livre=Le_Horla
