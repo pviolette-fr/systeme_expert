@@ -27,6 +27,8 @@ public class Moteur {
 		String trace = "";
 		
 		while(!baseDeFaits.contains(but)&&existeRegleApplicable(baseDeRegle, baseDeFaits)){	
+			/*	TODO : modifier conditions de la chaine pour que l'on ne parcours pas deux fois la base de règle à chaque tours
+			 */
 			
 			Regle regleApplicable = null;
 			
