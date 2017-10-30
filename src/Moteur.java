@@ -1,33 +1,27 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 
 public class Moteur {
 	
 	private ArrayList<Regle> m_baseDeRegles;
-	private ArrayList<Proposition> m_baseDeFaits;
+	private ArrayList<Fait> m_baseDeFaits;
 	
-	public Moteur(ArrayList<Regle> bdr, ArrayList<Proposition> bdf){
+	public Moteur(ArrayList<Regle> bdr, ArrayList<Fait> bdf){
 		
 		m_baseDeRegles = bdr;
 		m_baseDeFaits = bdf;
 		
 	}
 
-	public String chainageAvant(Proposition but){
+	public String chainageAvant(Fait but){
 		
 		ArrayList<Regle> baseDeRegle= new ArrayList<Regle>(m_baseDeRegles);
-		ArrayList<Proposition> baseDeFaits = new ArrayList<Proposition>(m_baseDeFaits);
+		ArrayList<Fait> baseDeFaits = new ArrayList<Fait>(m_baseDeFaits);
 		String trace = "";
 		
 		while(!baseDeFaits.contains(but)&&existeRegleApplicable(baseDeRegle, baseDeFaits)){	
 			/*	TODO : modifier conditions de la chaine pour que l'on ne parcours pas deux fois la base de règle à chaque tours
+			 * gna gna gna gna
 			 */
 			
 			Regle regleApplicable = null;
@@ -43,7 +37,7 @@ public class Moteur {
 			}
 			
 			baseDeRegle.remove(regleApplicable);
-			baseDeFaits.add(regleApplicable.getConclusion());	
+			baseDeFaits.addAll(regleApplicable.getConclusion());	
 			
 		}
 		
@@ -56,11 +50,11 @@ public class Moteur {
 		return trace;
 	}
 	
-	public String chainageArriere(Proposition but){
+	public String chainageArriere(Fait but){
 		ArrayList<Regle> baseDeRegle= new ArrayList<Regle>(m_baseDeRegles);
-		ArrayList<Proposition> baseDeFaits = new ArrayList<Proposition>(m_baseDeFaits);
+		ArrayList<Fait> baseDeFaits = new ArrayList<Fait>(m_baseDeFaits);
 		String trace = "";
-		ArrayList<Proposition> propositionsRecherchees = new ArrayList<Proposition>();
+		ArrayList<Fait> propositionsRecherchees = new ArrayList<Fait>();
 		propositionsRecherchees.add(but);
 		
 		int tour = 1;
@@ -73,13 +67,13 @@ public class Moteur {
 			}
 			System.out.println("====================");
 			System.out.println("====BASE DE FAITS====");
-			for(Proposition p : baseDeFaits){
+			for(Fait p : baseDeFaits){
 				
 				System.out.println(p);
 			}
 			System.out.println("====================");
 			System.out.println("Propositions recherchées");
-			for(Proposition p : propositionsRecherchees){
+			for(Fait p : propositionsRecherchees){
 				System.out.println(p);
 			}
 			System.out.println("====================");
@@ -88,7 +82,7 @@ public class Moteur {
 			
 			for(Regle r : baseDeRegle){
 				
-				if(propositionsRecherchees.contains(r.getConclusion())){
+				if(propositionsRecherchees.containsAll(r.getConclusion())){
 					reglesValide.add(r);
 					System.out.println("Règle dont la conclusion est une proposition recherchée : "+r);
 				}
@@ -101,7 +95,7 @@ public class Moteur {
 			
 			for(Regle regleValide : reglesValide){
 				if(baseDeFaits.containsAll(regleValide.getPremisses())){
-					baseDeFaits.add(regleValide.getConclusion());
+					baseDeFaits.addAll(regleValide.getConclusion());
 					System.out.println("On ajoute "+regleValide.getConclusion()+" à la base de faits car "+regleValide.getPremisses()+ "appartiennent à la base de fait");
 					baseDeRegle.remove(regleValide);
 					System.out.println("On retire : "+regleValide+" à la base de règle");
@@ -129,7 +123,7 @@ public class Moteur {
 		return trace;
 	}
 	
-	public boolean existeRegleApplicable(ArrayList<Regle> baseDeRegle, ArrayList<Proposition> baseDeFaits){
+	public boolean existeRegleApplicable(ArrayList<Regle> baseDeRegle, ArrayList<Fait> baseDeFaits){
 		for(Regle r : baseDeRegle){
 			
 			if(r.estApplicable(baseDeFaits)){

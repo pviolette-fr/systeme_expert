@@ -13,12 +13,16 @@ public class Main {
 		ArrayList<Regle> bdr = CreationBDR.creerBaseDeRegle("base_de_regle.txt");
 		
 		
-		ArrayList<Proposition> bdf = new ArrayList<Proposition>();
-		bdf.add(new Proposition("auteur","Boris_Vian"));
-		//bdf.add(new Proposition("theme","amour"));
-		bdf.add(new Proposition("theme","vengeance"));
+		ArrayList<Fait> bdf = new ArrayList<Fait>();
+		bdf.add(new Fait("auteur","Boris_Vian"));
+		bdf.add(new Fait("theme","amour"));
+		bdf.add(new Fait("theme","vengeance"));
+		bdf.add(new Fait("livre","1984"));
 		
-		Proposition but = new Proposition("livre","J_irai_cracher_sur_vos_tombes");
+		
+		
+		Fait but = new Fait("livre","J_irai_cracher_sur_vos_tombes");
+		
 		
 		Moteur m = new Moteur(bdr, bdf);
 		
@@ -29,6 +33,7 @@ public class Main {
 		
 		Scanner scan = new Scanner(System.in);
 		int reponse = scan.nextInt();
+		scan.close();
 		System.out.println(reponse);
 		switch(reponse){
 		case 1:
@@ -44,7 +49,7 @@ public class Main {
 			break;
 		}
 		
-		scan.close();
+		
 		
 		
 		

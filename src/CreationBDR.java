@@ -30,7 +30,6 @@ public class CreationBDR {
 			
 				r.setConclusion(ALORS[0], ALORS[1]);
 			
-				
 				baseDeRegles.add(r);
 			}
 			br.close();
