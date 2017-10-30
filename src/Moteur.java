@@ -19,22 +19,18 @@ public class Moteur {
 		ArrayList<Fait> baseDeFaits = new ArrayList<Fait>(m_baseDeFaits);
 		String trace = "";
 		
-		while(!baseDeFaits.contains(but)&&existeRegleApplicable(baseDeRegle, baseDeFaits)){	
-			/*	TODO : modifier conditions de la chaine pour que l'on ne parcours pas deux fois la base de règle à chaque tours
-			 * gna gna gna gna
+		while(!baseDeFaits.contains(but)){	
+			/*	TODO : PROBLEME REGLE modifier conditions de la chaine pour que l'on ne parcours pas deux fois la base de règle à chaque tours
+			 * 
 			 */
 			
-			Regle regleApplicable = null;
+			Regle regleApplicable = rechercheRegleApplicable(baseDeRegle,baseDeFaits);
 			
-			for(Regle r : baseDeRegle){
-				
-				if(r.estApplicable(baseDeFaits)){
-					regleApplicable = r;
-					trace+=regleApplicable.toString()+" ======  ";
-					break;
-				}
-				
+			if(regleApplicable==null){
+				break;
 			}
+			
+			trace+=regleApplicable.toString()+" ======  ";
 			
 			baseDeRegle.remove(regleApplicable);
 			baseDeFaits.addAll(regleApplicable.getConclusion());	
@@ -123,14 +119,18 @@ public class Moteur {
 		return trace;
 	}
 	
-	public boolean existeRegleApplicable(ArrayList<Regle> baseDeRegle, ArrayList<Fait> baseDeFaits){
+	
+	/*
+	 * Pour le moment, retourne la première règle applicable qu'il trouve
+	 */
+	public Regle rechercheRegleApplicable(ArrayList<Regle> baseDeRegle, ArrayList<Fait> baseDeFaits){
 		for(Regle r : baseDeRegle){
 			
 			if(r.estApplicable(baseDeFaits)){
-				return true;
+				return r;
 			}
 		}
-		return false;
+		return null;
 	}
 
 }
