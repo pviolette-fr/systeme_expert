@@ -1,54 +1,17 @@
 import java.util.ArrayList;
 
 
-public class Moteur {
-	
-	private ArrayList<Regle> m_baseDeRegles;
-	private ArrayList<Fait> m_baseDeFaits;
-	
-	public Moteur(ArrayList<Regle> bdr, ArrayList<Fait> bdf){
-		
-		m_baseDeRegles = bdr;
-		m_baseDeFaits = bdf;
-		
+public class ChainageArriere extends Chainage{
+
+	public ChainageArriere(Paquet baseDeRegle, ArrayList<Fait> baseDeFait) {
+		super(baseDeRegle, baseDeFait);
+		// TODO Auto-generated constructor stub
 	}
 
-	public String chainageAvant(Fait but){
-		
-		ArrayList<Regle> baseDeRegle= new ArrayList<Regle>(m_baseDeRegles);
-		ArrayList<Fait> baseDeFaits = new ArrayList<Fait>(m_baseDeFaits);
-		String trace = "";
-		
-		while(!baseDeFaits.contains(but)){	
-			/*	TODO : PROBLEME REGLE modifier conditions de la chaine pour que l'on ne parcours pas deux fois la base de règle à chaque tours
-			 * 
-			 */
-			
-			Regle regleApplicable = rechercheRegleApplicable(baseDeRegle,baseDeFaits);
-			
-			if(regleApplicable==null){
-				break;
-			}
-			
-			trace+=regleApplicable.toString()+" ======  ";
-			
-			baseDeRegle.remove(regleApplicable);
-			baseDeFaits.addAll(regleApplicable.getConclusion());	
-			
-		}
-		
-		if(baseDeFaits.contains(but)){
-			trace+=" SUCCES";
-			return trace;
-		}
-		
-		trace+=" ECHEC";
-		return trace;
-	}
-	
-	public String chainageArriere(Fait but){
-		ArrayList<Regle> baseDeRegle= new ArrayList<Regle>(m_baseDeRegles);
-		ArrayList<Fait> baseDeFaits = new ArrayList<Fait>(m_baseDeFaits);
+	@Override
+	protected boolean rechercheBut(Fait but) {
+		Paquet baseDeRegle= m_baseDeRegles;
+		ArrayList<Fait> baseDeFaits = m_baseDeFaits;
 		String trace = "";
 		ArrayList<Fait> propositionsRecherchees = new ArrayList<Fait>();
 		propositionsRecherchees.add(but);
@@ -58,7 +21,7 @@ public class Moteur {
 		
 			System.out.println(tour);
 			System.out.println("====BASE DE REGLES====");
-			for(Regle r : baseDeRegle){
+			for(Regle r : baseDeRegle.getRegles()){
 				System.out.println(r);
 			}
 			System.out.println("====================");
@@ -76,7 +39,7 @@ public class Moteur {
 			
 			ArrayList<Regle> reglesValide = new ArrayList<Regle>();
 			
-			for(Regle r : baseDeRegle){
+			for(Regle r : baseDeRegle.getRegles()){
 				
 				if(propositionsRecherchees.containsAll(r.getConclusion())){
 					reglesValide.add(r);
@@ -93,7 +56,7 @@ public class Moteur {
 				if(baseDeFaits.containsAll(regleValide.getPremisses())){
 					baseDeFaits.addAll(regleValide.getConclusion());
 					System.out.println("On ajoute "+regleValide.getConclusion()+" à la base de faits car "+regleValide.getPremisses()+ "appartiennent à la base de fait");
-					baseDeRegle.remove(regleValide);
+					baseDeRegle.retirerRegle(regleValide);
 					System.out.println("On retire : "+regleValide+" à la base de règle");
 					propositionsRecherchees.remove(regleValide.getConclusion());
 					
@@ -110,27 +73,12 @@ public class Moteur {
 		
 		if(baseDeFaits.contains(but)){
 			trace+=" SUCCES";
+			return true;
 		}
 		else{
 			trace+=" ECHEC";
+			return false;
 		}
-		
-		
-		return trace;
-	}
-	
-	
-	/*
-	 * Pour le moment, retourne la première règle applicable qu'il trouve
-	 */
-	public Regle rechercheRegleApplicable(ArrayList<Regle> baseDeRegle, ArrayList<Fait> baseDeFaits){
-		for(Regle r : baseDeRegle){
-			
-			if(r.estApplicable(baseDeFaits)){
-				return r;
-			}
-		}
-		return null;
 	}
 
 }
