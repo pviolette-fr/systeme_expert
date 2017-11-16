@@ -1,0 +1,75 @@
+{
+	"paquets": [{
+		"regles": [{
+				"premisse": [{
+					"var": "livre",
+					"value": "1984"
+				}],
+				"conclusion": [{
+					"var": "auteur",
+					"value": "George Orwell"
+				}]
+			},
+			{
+				"premisse": [{
+					"var": "livre",
+					"value": "Orgueil et Prejuges"
+				}],
+				"conclusion": [{
+					"var": "auteur",
+					"value": "Jane Austen"
+				}]
+			},
+			{
+				"premisse": [{
+					"var": "livre",
+					"value": "Shining"
+				}],
+				"conclusion": [{
+					"var": "auteur",
+					"value": "Stephen King"
+				}]
+			},
+			{
+				"premisse": [{
+					"var": "livre",
+					"value": "Ça"
+				}],
+				"conclusion": [{
+					"var": "auteur",
+					"value": "Stephen King"
+				}]
+			},
+			{
+				"premisse": [{
+					"var": "livre",
+					"value": "J'irai cracher sur vos tombes"
+				}],
+				"conclusion": [{
+					"var": "auteur",
+					"value": "Boris Vian"
+				}]
+			},
+			{
+				"premisse": [{
+					"var": "livre",
+					"value": "Voyage au centre de la terre"
+				}],
+				"conclusion": [{
+					"var": "auteur",
+					"value": "Jules Vernes"
+				}]
+			},
+			{
+				"premisse": [{
+					"var": "livre",
+					"value": "Bonjour Tristesse"
+				}],
+				"conclusion": [{
+					"var": "auteur",
+					"value": "Francoise Sagan"
+				}]
+			}
+		]
+	}]
+}
