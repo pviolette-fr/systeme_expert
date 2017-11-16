@@ -26,6 +26,5 @@ public class Fait {
 
 	public boolean equals(Object arg0) {
 		return (((Fait)arg0).getVar().equals(m_variable)&&((Fait)arg0).getVal().equals(m_valeur));
-	}
-	
+	}	
 }

@@ -8,10 +8,9 @@ public class Regle {
 	
 	public Regle(){
 		m_premisses = new ArrayList<Fait>();
-		m_conclusions = new ArrayList<Fait>();
-		
+		m_conclusions = new ArrayList<Fait>();	
 	}
-	
+
 	public Regle(ArrayList<Fait> premisses, ArrayList<Fait> conclusion){
 		
 		m_premisses = new ArrayList<Fait>(premisses);
