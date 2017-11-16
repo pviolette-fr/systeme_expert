@@ -4,12 +4,12 @@ import java.util.ArrayList;
 public abstract class Chainage {
 
 	protected Paquet m_baseDeRegles;
-	protected ArrayList<Fait> m_baseDeFaits;
+	protected BaseDeFait m_baseDeFaits;
 	
 	
-	public Chainage(Paquet baseDeRegle, ArrayList<Fait> baseDeFait){
+	public Chainage(Paquet baseDeRegle, BaseDeFait baseDeFait){
 		m_baseDeRegles = baseDeRegle;
-		m_baseDeFaits = new ArrayList<Fait>(baseDeFait);
+		m_baseDeFaits = new BaseDeFait(baseDeFait);
 	}
 	
 	protected abstract boolean rechercheBut(Fait but);
@@ -17,7 +17,7 @@ public abstract class Chainage {
 	/*
 	 * Pour le moment, retourne la première règle applicable qu'il trouve
 	 */
-	protected Regle rechercheRegleApplicable(Paquet baseDeRegle, ArrayList<Fait> baseDeFaits){
+	protected Regle rechercheRegleApplicable(Paquet baseDeRegle, BaseDeFait baseDeFaits){
 		for(Regle r : baseDeRegle.getRegles()){
 			
 			if(r.estApplicable(baseDeFaits)){
@@ -27,11 +27,14 @@ public abstract class Chainage {
 		return null;
 	}
 	
-	static Chainage getChainage(int mode, Paquet baseDeRegle, ArrayList<Fait> baseDeFait){
+	static final int CHAINAGE_AVANT = 0;
+	static final int CHAINAGE_ARRIERE = 1;
+	
+	static Chainage getChainage(int mode, Paquet baseDeRegle, BaseDeFait baseDeFait){
 		switch(mode){
-		case 0:
+		case CHAINAGE_AVANT:
 			return new ChainageAvant(baseDeRegle, baseDeFait);
-		case 1:
+		case CHAINAGE_ARRIERE:
 			return new ChainageArriere(baseDeRegle,baseDeFait);
 		default:
 			return null;

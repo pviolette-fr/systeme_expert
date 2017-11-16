@@ -3,14 +3,14 @@ import java.util.ArrayList;
 
 public class ChainageAvant extends Chainage {
 
-	public ChainageAvant(Paquet baseDeRegle, ArrayList<Fait> baseDeFait) {
+	public ChainageAvant(Paquet baseDeRegle, BaseDeFait baseDeFait) {
 		super(baseDeRegle, baseDeFait);
 	}
 
 	@Override
 	public boolean rechercheBut(Fait but) {
 		Paquet baseDeRegle= m_baseDeRegles;
-		ArrayList<Fait> baseDeFaits = m_baseDeFaits;
+		BaseDeFait baseDeFaits = new BaseDeFait( m_baseDeFaits );
 		String trace = "";
 		
 		while(!baseDeFaits.contains(but)){	

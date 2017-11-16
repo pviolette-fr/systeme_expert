@@ -1,24 +1,30 @@
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.ArrayList;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 
 public class Regle {
 
-	private  ArrayList<Fait> m_premisses;
-	private ArrayList<Fait> m_conclusions;
+	private  List<Fait> m_premisses;
+	private List<Fait> m_conclusions;
 	
 	public Regle(){
 		m_premisses = new ArrayList<Fait>();
 		m_conclusions = new ArrayList<Fait>();	
 	}
 
-	public Regle(ArrayList<Fait> premisses, ArrayList<Fait> conclusion){
+	public Regle(List<Fait> premisses, List<Fait> conclusion){
 		
 		m_premisses = new ArrayList<Fait>(premisses);
 		m_conclusions = new ArrayList<Fait>(conclusion);
 		
 	}
 	
-	public boolean estApplicable(ArrayList<Fait> baseDeFait){
+	public boolean estApplicable(List<Fait> baseDeFait){
 		boolean estApplicable = true;
 		for(Fait p : m_premisses){
 		
@@ -35,29 +41,55 @@ public class Regle {
 	public void addPremisse(String variable, String valeur){
 		m_premisses.add(new Fait(variable,valeur));
 	}
-	
-	public void setConclusion(String variable, String valeur){
+		
+	public void addConclusion(String variable, String valeur){
 		m_conclusions.add(new Fait(variable,valeur));
 	}
 	
-	public ArrayList<Fait> getPremisses(){
+	public List<Fait> getPremisses(){
 		return m_premisses;
 	}
 	
-	public ArrayList<Fait> getConclusion(){
+	public List<Fait> getConclusion(){
 		return m_conclusions;
 	}
 
+	public static Regle parseJSON(JSONObject obj){
+
+		List<Fait> premisses = new LinkedList<Fait>();
+		List<Fait> conclusions = new LinkedList<Fait>();
+		
+		JSONArray json_premisse = (JSONArray) obj.get("premisse");
+		for(Object o : json_premisse){
+			premisses.add(Fait.parseJSON((JSONObject) o));
+		}
+		JSONArray json_conclusion = (JSONArray) obj.get("conclusion");
+		for(Object o : json_conclusion){
+			conclusions.add(Fait.parseJSON((JSONObject) o));
+		}
+				
+		return new Regle(premisses, conclusions);
+	}
+	
 	public String toString(){
 		String regleToString="SI ";
-		for(Fait p : m_premisses){
-			regleToString+=p.toString()+" ET";
+		Iterator<Fait> it = m_premisses.iterator();
+		while(it.hasNext()){
+			regleToString += it.next().toString();
+			if(it.hasNext()){
+				regleToString += " ET ";
+			}
 		}
 		
-		regleToString+="ALORS ";
-		for(Fait p : m_conclusions){
-			regleToString+=m_conclusions.toString()+" ET";
+		regleToString+= System.lineSeparator() + "\t\t ALORS ";
+		it = m_conclusions.iterator();
+		while(it.hasNext()){
+			regleToString += it.next().toString();
+			if(it.hasNext()){
+				regleToString += " ET ";
+			}
 		}
+		
 				
 		return regleToString;
 	}

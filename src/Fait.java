@@ -1,3 +1,5 @@
+import org.json.simple.JSONObject;
+
 
 public class Fait {
 	
@@ -21,10 +23,14 @@ public class Fait {
 	}
 	
 	public String toString(){
-		return m_variable+"="+m_valeur;
+		return '"' + m_variable+"\" = \""+m_valeur + '"';
 	}
 
 	public boolean equals(Object arg0) {
 		return (((Fait)arg0).getVar().equals(m_variable)&&((Fait)arg0).getVal().equals(m_valeur));
-	}	
+	}
+	
+	public static Fait parseJSON(JSONObject obj){
+		return new Fait( (String) obj.get("var"), (String) obj.get("value"));
+	}
 }

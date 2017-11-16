@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class ChainageArriere extends Chainage{
 
-	public ChainageArriere(Paquet baseDeRegle, ArrayList<Fait> baseDeFait) {
+	public ChainageArriere(Paquet baseDeRegle, BaseDeFait baseDeFait) {
 		super(baseDeRegle, baseDeFait);
 		// TODO Auto-generated constructor stub
 	}
@@ -11,7 +11,7 @@ public class ChainageArriere extends Chainage{
 	@Override
 	protected boolean rechercheBut(Fait but) {
 		Paquet baseDeRegle= m_baseDeRegles;
-		ArrayList<Fait> baseDeFaits = m_baseDeFaits;
+		BaseDeFait baseDeFaits = new BaseDeFait(m_baseDeFaits);
 		String trace = "";
 		ArrayList<Fait> propositionsRecherchees = new ArrayList<Fait>();
 		propositionsRecherchees.add(but);

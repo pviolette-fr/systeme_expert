@@ -5,21 +5,21 @@ public class MoteurGroupementParPaquets {
 
 	private int m_mode;
 	
-	private ArrayList<Paquet> m_paquets;
-	private ArrayList<Fait> m_baseDefaits;
+	private BaseDeRegle m_bdr;
+	private BaseDeFait m_baseDefaits;
 	
-	public MoteurGroupementParPaquets(ArrayList<Paquet> paquets, ArrayList<Fait> baseDeFaits, int mode){
+	public MoteurGroupementParPaquets(BaseDeRegle bdr, BaseDeFait baseDeFaits, int mode){
 		
-		m_paquets = new ArrayList<Paquet>(paquets);
-		m_baseDefaits = new ArrayList<Fait>(baseDeFaits);
+		m_bdr = new BaseDeRegle(bdr);
+		m_baseDefaits = new BaseDeFait(baseDeFaits);
 		
 		m_mode = mode;
 		
 	}
-	
+		
 	public boolean rechercherBut(Fait but){
 		
-		for(Paquet p : m_paquets){
+		for(Paquet p : m_bdr){
 			
 			Chainage c = Chainage.getChainage(m_mode, p, m_baseDefaits);
 			

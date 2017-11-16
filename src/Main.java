@@ -2,6 +2,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 
 public class Main {
 
@@ -10,10 +14,8 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-		
-		
-		
-		ArrayList<Fait> bdf = new ArrayList<Fait>();
+					
+		BaseDeFait bdf = new BaseDeFait();
 		bdf.add(new Fait("auteur","Boris_Vian"));
 		bdf.add(new Fait("theme","amour"));
 		bdf.add(new Fait("theme","vengeance"));
@@ -30,35 +32,29 @@ public class Main {
 		System.out.println("3: Groupement par paquets");
 		
 		
+		BaseDeRegle bdr = CreationBDR.creerBaseDeRegle("base_de_regle.json");
+		
 		Scanner scan = new Scanner(System.in);
 		int reponse = scan.nextInt();
 		scan.close();
 		System.out.println(reponse);
 		switch(reponse){
 		case 1:
-			Paquet bdr = CreationBDR.creerBaseDeRegle("base_de_regle.txt");
-			ChainageAvant c = new ChainageAvant(bdr, bdf);
-			System.out.println(c.rechercheBut(but));
+			Chainage cav = Chainage.getChainage(Chainage.CHAINAGE_AVANT, bdr.get(0), bdf);
+			System.out.println(cav.rechercheBut(but));
 			break;
 		case 2:
-			Paquet bdrr = CreationBDR.creerBaseDeRegle("base_de_regle.txt");
-			ChainageArriere car = new ChainageArriere(bdrr, bdf);
+			Chainage car = Chainage.getChainage(Chainage.CHAINAGE_ARRIERE, bdr.get(0), bdf);
 			System.out.println(car.rechercheBut(but));
 			break;
 		case 3:
-			ArrayList<Paquet> bdrp = CreationBDR.creerBaseDeRegleParPaquets("base_de_regle.txt");
-			MoteurGroupementParPaquets m = new MoteurGroupementParPaquets(bdrp, bdf, 1);
+			MoteurGroupementParPaquets m = new MoteurGroupementParPaquets(bdr, bdf, 1);
 			System.out.println(m.rechercherBut(but));
 			break;
 		default:
 			System.out.println("Erreur");
 			break;
 		}
-		
-		
-		
-		
-		
 		
 		
 

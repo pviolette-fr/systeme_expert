@@ -1,5 +1,6 @@
 {
 	"paquets": [{
+		"mode" : "default"
 		"regles": [{
 				"premisse": [{
 					"var": "livre",
@@ -13,7 +14,7 @@
 			{
 				"premisse": [{
 					"var": "livre",
-					"value": "Orgueil et Prejuges"
+					"value": "Orgueil et Prejugés"
 				}],
 				"conclusion": [{
 					"var": "auteur",
@@ -69,6 +70,267 @@
 					"var": "auteur",
 					"value": "Francoise Sagan"
 				}]
+			},
+			{
+				"premisse": [{
+					"var": "livre",
+					"value": "Le Horla"
+				}],
+				"conclusion": [{
+					"var": "auteur",
+					"value": "Guy de Maupassant"
+				}]
+			},
+			{
+				"premisse" : [{
+					"var" : "livre",
+					"value" : "Thérèse Raquin"
+				}],
+				"conclusion": [{
+					"var" : "auteur",
+					"value" : "Emile Zola",
+				}
+			},
+			,
+			{
+				"premisse" : [{
+					"var" : "livre",
+					"value" : "1984"
+				}],
+				"conclusion": [{
+					"var" : "style",
+					"value" : "SF",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "livre",
+					"value" : "Orgueil et Prejugés"
+				}],
+				"conclusion": [{
+					"var" : "style",
+					"value" : "romance",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "livre",
+					"value" : "Shinning"
+				}],
+				"conclusion": [{
+					"var" : "style",
+					"value" : "thriller",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "livre",
+					"value" : "Ça"
+				}],
+				"conclusion": [{
+					"var" : "style",
+					"value" : "horreur",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "livre",
+					"value" : "J'irai cracher sur vos tombes"
+				}],
+				"conclusion": [{
+					"var" : "style",
+					"value" : "thriller",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "livre",
+					"value" : "Voyage au centre de la terre"
+				}],
+				"conclusion": [{
+					"var" : "style",
+					"value" : "Aventure",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "livre",
+					"value" : "Bonjour Tristesse"
+				}],
+				"conclusion": [{
+					"var" : "style",
+					"value" : "drame",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "",
+					"value" : ""
+				}],
+				"conclusion": [{
+					"var" : "",
+					"value" : "",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "",
+					"value" : ""
+				}],
+				"conclusion": [{
+					"var" : "",
+					"value" : "",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "",
+					"value" : ""
+				}],
+				"conclusion": [{
+					"var" : "",
+					"value" : "",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "",
+					"value" : ""
+				}],
+				"conclusion": [{
+					"var" : "",
+					"value" : "",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "",
+					"value" : ""
+				}],
+				"conclusion": [{
+					"var" : "",
+					"value" : "",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "",
+					"value" : ""
+				}],
+				"conclusion": [{
+					"var" : "",
+					"value" : "",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "",
+					"value" : ""
+				}],
+				"conclusion": [{
+					"var" : "",
+					"value" : "",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "",
+					"value" : ""
+				}],
+				"conclusion": [{
+					"var" : "",
+					"value" : "",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "",
+					"value" : ""
+				}],
+				"conclusion": [{
+					"var" : "",
+					"value" : "",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "",
+					"value" : ""
+				}],
+				"conclusion": [{
+					"var" : "",
+					"value" : "",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "",
+					"value" : ""
+				}],
+				"conclusion": [{
+					"var" : "",
+					"value" : "",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "",
+					"value" : ""
+				}],
+				"conclusion": [{
+					"var" : "",
+					"value" : "",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "",
+					"value" : ""
+				}],
+				"conclusion": [{
+					"var" : "",
+					"value" : "",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "",
+					"value" : ""
+				}],
+				"conclusion": [{
+					"var" : "",
+					"value" : "",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "",
+					"value" : ""
+				}],
+				"conclusion": [{
+					"var" : "",
+					"value" : "",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "",
+					"value" : ""
+				}],
+				"conclusion": [{
+					"var" : "",
+					"value" : "",
+				}
+			},
+			{
+				"premisse" : [{
+					"var" : "",
+					"value" : ""
+				}],
+				"conclusion": [{
+					"var" : "",
+					"value" : "",
+				}
 			}
 		]
 	}]
