@@ -1,6 +1,12 @@
-import java.util.ArrayList;
+package MoteurInference;
+
+import MoteurInference.BaseDeFait;
+import MoteurInference.Fait;
 
 
+/**
+ * @author Valentine Rahier
+ */
 public class ChainageAvant extends Chainage {
 
 	public ChainageAvant(Paquet baseDeRegle, BaseDeFait baseDeFait) {

@@ -1,6 +1,6 @@
 {
 	"paquets": [{
-		"mode" : "default"
+		"mode" : "default",
 		"regles": [{
 				"premisse": [{
 					"var": "livre",

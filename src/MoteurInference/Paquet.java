@@ -1,3 +1,5 @@
+package MoteurInference;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -7,6 +9,9 @@ import org.json.simple.JSONObject;
 
 
 public class Paquet {
+
+	static final String JSON_MODE_KEY = "mode";
+	static final String JSON__REGLES_KEY = "regles";
 	
 	private List<Regle> m_regles;
 	
@@ -56,5 +61,21 @@ public class Paquet {
 		}
 		
 		return new Paquet(regles);
+	}
+
+	public JSONObject toJSONObject(){
+		JSONObject json = new JSONObject();
+
+		JSONArray regles = new JSONArray();
+
+		for(Regle r : m_regles){
+			regles.add(r.toJSONObject());
+		}
+
+		json.put(JSON_MODE_KEY, "default");
+		json.put(JSON__REGLES_KEY, regles);
+
+
+		return json;
 	}
 }

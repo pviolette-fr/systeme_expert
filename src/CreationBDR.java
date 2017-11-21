@@ -1,18 +1,18 @@
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.util.ArrayList;
 
+import MoteurInference.BaseDeRegle;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+
+/**
+ * @author Paulin VIOLETTE
+ */
 public class CreationBDR {
 	
 	public static BaseDeRegle creerBaseDeRegle(String file){

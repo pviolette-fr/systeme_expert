@@ -1,7 +1,14 @@
+package MoteurInference;
+
+import MoteurInference.BaseDeFait;
+import MoteurInference.Fait;
+
 import java.util.ArrayList;
 
-
-public class ChainageArriere extends Chainage{
+/**
+ * @author Valentine Rahier
+ */
+public class ChainageArriere extends Chainage {
 
 	public ChainageArriere(Paquet baseDeRegle, BaseDeFait baseDeFait) {
 		super(baseDeRegle, baseDeFait);
@@ -9,7 +16,7 @@ public class ChainageArriere extends Chainage{
 	}
 
 	@Override
-	protected boolean rechercheBut(Fait but) {
+	public boolean rechercheBut(Fait but) {
 		Paquet baseDeRegle= m_baseDeRegles;
 		BaseDeFait baseDeFaits = new BaseDeFait(m_baseDeFaits);
 		String trace = "";

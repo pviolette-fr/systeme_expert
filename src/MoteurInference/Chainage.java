@@ -1,6 +1,9 @@
-import java.util.ArrayList;
+package MoteurInference;
 
 
+/**
+ * @author Valentine Rahier
+ */
 public abstract class Chainage {
 
 	protected Paquet m_baseDeRegles;
@@ -12,7 +15,7 @@ public abstract class Chainage {
 		m_baseDeFaits = new BaseDeFait(baseDeFait);
 	}
 	
-	protected abstract boolean rechercheBut(Fait but);
+	public abstract boolean rechercheBut(Fait but);
 	
 	/*
 	 * Pour le moment, retourne la première règle applicable qu'il trouve
@@ -27,10 +30,10 @@ public abstract class Chainage {
 		return null;
 	}
 	
-	static final int CHAINAGE_AVANT = 0;
-	static final int CHAINAGE_ARRIERE = 1;
+	public static final int CHAINAGE_AVANT = 0;
+	public static final int CHAINAGE_ARRIERE = 1;
 	
-	static Chainage getChainage(int mode, Paquet baseDeRegle, BaseDeFait baseDeFait){
+	public static Chainage getChainage(int mode, Paquet baseDeRegle, BaseDeFait baseDeFait){
 		switch(mode){
 		case CHAINAGE_AVANT:
 			return new ChainageAvant(baseDeRegle, baseDeFait);

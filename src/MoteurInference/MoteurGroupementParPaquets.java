@@ -1,6 +1,9 @@
-import java.util.ArrayList;
+package MoteurInference;
 
 
+/**
+ * @author Valentine Rahier
+ */
 public class MoteurGroupementParPaquets {
 
 	private int m_mode;

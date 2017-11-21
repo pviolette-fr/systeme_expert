@@ -1,3 +1,5 @@
+package MoteurInference;
+
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -11,10 +13,13 @@ import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 
 
-public class BaseDeRegle implements List<Paquet> {
+public class BaseDeRegle implements List<Paquet>, JSONAware {
+
+    static final String JSON_PAQUETS_KEY = "paquets";
 
 	private List<Paquet> m_content;
 	
@@ -42,7 +47,28 @@ public class BaseDeRegle implements List<Paquet> {
 		
 		return result;
 	}
-	
+
+	public JSONObject toJSONObject(){
+	    JSONObject json = new JSONObject();
+
+	    JSONArray paquets = new JSONArray();
+
+	    for(Paquet p : m_content){
+	        paquets.add(p.toJSONObject());
+        }
+
+        json.put(JSON_PAQUETS_KEY, paquets);
+
+        return json;
+    }
+
+    @Override
+    public String toJSONString() {
+
+        return toJSONObject().toString();
+    }
+
+
 	public String toString(){
 		String res="";
 		res+= "####################################################" + System.lineSeparator();
@@ -172,7 +198,6 @@ public class BaseDeRegle implements List<Paquet> {
 	public <T> T[] toArray(T[] a) {
 		return m_content.toArray(a);
 	}
-	
-	
+
 
 }
