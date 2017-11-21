@@ -62,7 +62,6 @@ public class BaseDeRegle implements List<Paquet>, JSONAware {
         return json;
     }
 
-    @Override
     public String toJSONString() {
 
         return toJSONObject().toString();

@@ -1,5 +1,7 @@
 package MoteurInference;
 
+import java.util.LinkedList;
+
 import MoteurInference.BaseDeFait;
 import MoteurInference.Fait;
 
@@ -7,24 +9,24 @@ import MoteurInference.Fait;
 /**
  * @author Valentine Rahier
  */
-public class ChainageAvant extends Chainage {
+public class ChainageAvantProfondeur extends Chainage {
 
-	public ChainageAvant(Paquet baseDeRegle, BaseDeFait baseDeFait) {
+	public ChainageAvantProfondeur(Paquet baseDeRegle, BaseDeFait baseDeFait) {
 		super(baseDeRegle, baseDeFait);
 	}
 
 	@Override
 	public boolean rechercheBut(Fait but) {
 		Paquet baseDeRegle= m_baseDeRegles;
-		BaseDeFait baseDeFaits = new BaseDeFait( m_baseDeFaits );
+		
 		String trace = "";
 		
-		while(!baseDeFaits.contains(but)){	
+		while(!m_baseDeFaits.contains(but)){	
 			/*	TODO : PROBLEME REGLE modifier conditions de la chaine pour que l'on ne parcours pas deux fois la base de règle à chaque tours
 			 * 
 			 */
 			
-			Regle regleApplicable = rechercheRegleApplicable(baseDeRegle,baseDeFaits);
+			Regle regleApplicable = rechercheRegleApplicable(baseDeRegle,m_baseDeFaits,LES_FAITS_DEDUITS_LES_PLUS_RECENTS);
 			
 			if(regleApplicable==null){
 				break;
@@ -33,11 +35,16 @@ public class ChainageAvant extends Chainage {
 			trace+=regleApplicable.toString()+" ======  ";
 			
 			baseDeRegle.retirerRegle(regleApplicable);
-			baseDeFaits.addAll(regleApplicable.getConclusion());	
+			
+			for(Fait f : regleApplicable.getConclusion()){
+				if(!m_baseDeFaits.contains(f)){
+					m_baseDeFaits.add(f);
+				}
+			}
 			
 		}
 		
-		if(baseDeFaits.contains(but)){
+		if(m_baseDeFaits.contains(but)){
 			trace+=" SUCCES";
 			return true;
 		}

@@ -43,6 +43,10 @@ public class Paquet {
 		
 	}
 	
+	public int size(){
+		return m_regles.size();
+	}
+	
 	public String toString(){
 		String res = "=============PAQUET=============" + System.lineSeparator();
 		for(Regle r : m_regles){
