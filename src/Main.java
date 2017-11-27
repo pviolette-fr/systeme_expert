@@ -57,9 +57,6 @@ public class Main {
 			System.out.println("Erreur");
 			break;
 		}
-		
-		
-
 	}
 
 }
