@@ -114,12 +114,7 @@
               "value": "Guy de Maupassant"
             }
           ]
-        }
-     ]
-    },
-    {
-      "mode": "default",
-      "regles": [
+        },
         {
           "premisse": [
             {
@@ -215,20 +210,6 @@
             {
               "var": "style",
               "value": "Aventure"
-            }
-          ]
-        },
-	{
-          "premisse": [
-            {
-              "var": "auteur",
-              "value": "Stephen King"
-            }
-          ],
-          "conclusion": [
-            {
-              "var": "livre",
-              "value": "Shining"
             }
           ]
         },
