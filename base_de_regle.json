@@ -3,8 +3,8 @@
     {
       "mode": "default",
       "regles": [
-        {
-          "premisse": [
+		{
+		   "premisse": [
             {
               "var": "livre",
               "value": "1984"
@@ -14,21 +14,37 @@
             {
               "var": "auteur",
               "value": "George Orwell"
-            }
+            },
+			{
+			  "var": "theme",
+			  "value": "SF"
+			}
+			{
+			   "var": "epoque",
+			   "value": "20"
+			}
           ]
         },
         {
           "premisse": [
             {
               "var": "livre",
-              "value": "Orgueil et Prejugés"
+              "value": "La ferme des animaux"
             }
           ],
           "conclusion": [
             {
               "var": "auteur",
-              "value": "Jane Austen"
-            }
+              "value": "George Orwell"
+            },
+			{
+			   "var": "epoque",
+			   "value": "20"
+			},
+			{
+			   "var": "theme",
+			   "value": "SF"
+			}
           ]
         },
         {
@@ -42,7 +58,15 @@
             {
               "var": "auteur",
               "value": "Stephen King"
-            }
+            },
+			{
+			   "var": "theme",
+			   "value": "horreur"
+			},
+			{
+			   "var": "epoque",
+			   "value": "20"
+			}
           ]
         },
         {
@@ -56,7 +80,37 @@
             {
               "var": "auteur",
               "value": "Stephen King"
+            },
+			{
+			   "var": "theme",
+			   "value": "horreur"
+			},
+			{
+			    "var": "epoque",
+				"value": "20"
+			}
+          ]
+        },
+        {
+          "premisse": [
+            {
+              "var": "livre",
+              "value": "11/22/63"
             }
+          ],
+          "conclusion": [
+            {
+              "var": "auteur",
+              "value": "Stephen King"
+            },
+			{
+			   "var": "theme",
+			   "value": "SF"
+			},
+			{
+			    "var": "epoque",
+				"value": "21"
+			}
           ]
         },
         {
@@ -70,35 +124,103 @@
             {
               "var": "auteur",
               "value": "Boris Vian"
-            }
+            },
+			{
+			   "var": "theme",
+			   "value": "thriller"
+			},
+			{
+			   "var": "epoque",
+			   "value": "20"				
+			}
           ]
         },
         {
           "premisse": [
             {
               "var": "livre",
-              "value": "Voyage au centre de la terre"
+              "value": "L'écume des jours"
             }
           ],
           "conclusion": [
             {
               "var": "auteur",
-              "value": "Jules Vernes"
-            }
+              "value": "Boris Vian"
+            },
+			{
+			   "var": "theme",
+			   "value": "fanstastique"
+			},
+			{
+			   "var": "epoque",
+			   "value": "20"				
+			}
           ]
         },
         {
           "premisse": [
             {
               "var": "livre",
-              "value": "Bonjour Tristesse"
+              "value": "Orgueil et préjugés"
             }
           ],
           "conclusion": [
             {
               "var": "auteur",
-              "value": "Francoise Sagan"
+              "value": "Jane Austen"
+            },
+			{
+			   "var": "theme",
+			   "value": "romance"
+			},
+			{
+			   "var": "epoque",
+			   "value": "19"				
+			}
+          ]
+        },
+        {
+          "premisse": [
+            {
+              "var": "livre",
+              "value": "Raison et sentiments"
             }
+          ],
+          "conclusion": [
+            {
+              "var": "auteur",
+              "value": "Jane Austen"
+            },
+			{
+			   "var": "theme",
+			   "value": "romance"
+			},
+			{
+			   "var": "epoque",
+			   "value": "19"				
+			}
+          ]
+        },
+        {
+          "premisse": [
+            {
+              "var": "livre",
+              "value": "Bel Ami"
+            }
+          ],
+          "conclusion": [
+            {
+              "var": "auteur",
+              "value": "Guy de Maupassant"
+            },
+			{
+			   "var": "theme",
+			   "value": "realisme"
+			},
+			{
+			   "var": "epoque",
+			   "value": "19"				
+			}
           ]
         },
         {
@@ -112,96 +234,81 @@
             {
               "var": "auteur",
               "value": "Guy de Maupassant"
-            }
+            },
+			{
+			   "var": "theme",
+			   "value": "fantastique"
+			},
+			{
+			   "var": "epoque",
+			   "value": "19"				
+			}
           ]
-        }
-     ]
-    },
-    {
-      "mode": "default",
-      "regles": [
+        },
         {
           "premisse": [
             {
               "var": "livre",
-              "value": "Thérèse Raquin"
+              "value": "Boule de suif"
             }
           ],
           "conclusion": [
             {
               "var": "auteur",
-              "value": "Emile Zola"
-            }
+              "value": "Guy de Maupassant"
+            },
+			{
+			   "var": "theme",
+			   "value": "société"
+			},
+			{
+			   "var": "epoque",
+			   "value": "19"				
+			}
           ]
         },
         {
           "premisse": [
             {
               "var": "livre",
-              "value": "1984"
+              "value": "Le rouge et le noir"
             }
           ],
           "conclusion": [
             {
-              "var": "style",
-              "value": "SF"
-            }
+              "var": "auteur",
+              "value": "Stendhal"
+            },
+			{
+			   "var": "theme",
+			   "value": "romance"
+			},
+			{
+			   "var": "epoque",
+			   "value": "19"				
+			}
           ]
         },
         {
           "premisse": [
             {
               "var": "livre",
-              "value": "Orgueil et Prejugés"
+              "value": "La chartreuse de Parme"
             }
           ],
           "conclusion": [
             {
-              "var": "style",
-              "value": "romance"
-            }
-          ]
-        },
-        {
-          "premisse": [
-            {
-              "var": "livre",
-              "value": "Shinning"
-            }
-          ],
-          "conclusion": [
-            {
-              "var": "style",
-              "value": "thriller"
-            }
-          ]
-        },
-        {
-          "premisse": [
-            {
-              "var": "livre",
-              "value": "Ça"
-            }
-          ],
-          "conclusion": [
-            {
-              "var": "style",
-              "value": "horreur"
-            }
-          ]
-        },
-        {
-          "premisse": [
-            {
-              "var": "livre",
-              "value": "J'irai cracher sur vos tombes"
-            }
-          ],
-          "conclusion": [
-            {
-              "var": "style",
-              "value": "thriller"
-            }
+              "var": "auteur",
+              "value": "Stendhal"
+            },
+			{
+			   "var": "theme",
+			   "value": "romance"
+			},
+			{
+			   "var": "epoque",
+			   "value": "19"				
+			}
           ]
         },
         {
@@ -213,12 +320,242 @@
           ],
           "conclusion": [
             {
-              "var": "style",
-              "value": "Aventure"
+              "var": "auteur",
+              "value": "Jules Verne"
+            },
+			{
+			   "var": "theme",
+			   "value": "aventure"
+			},
+			{
+			   "var": "epoque",
+			   "value": "19"				
+			}
+          ]
+        },
+        {
+          "premisse": [
+            {
+              "var": "livre",
+              "value": "Le tour du monde en 80 jours"
+            }
+          ],
+          "conclusion": [
+            {
+              "var": "auteur",
+              "value": "Jules Verne"
+            },
+			{
+			   "var": "theme",
+			   "value": "aventure"
+			},
+			{
+			   "var": "epoque",
+			   "value": "19"				
+			}
+          ]
+        },
+        {
+          "premisse": [
+            {
+              "var": "livre",
+              "value": "Thérèse Raquin"
+            }
+          ],
+          "conclusion": [
+            {
+              "var": "auteur",
+              "value": "Emile Zola"
+            },
+			{
+			   "var": "theme",
+			   "value": "société"
+			},
+			{
+			   "var": "epoque",
+			   "value": "19"				
+			}
+          ]
+        },
+        {
+          "premisse": [
+            {
+              "var": "livre",
+              "value": "L'assomoir"
+            }
+          ],
+          "conclusion": [
+            {
+              "var": "auteur",
+              "value": "Emile Zola"
+            },
+			{
+			   "var": "theme",
+			   "value": "société"
+			},
+			{
+			   "var": "epoque",
+			   "value": "19"				
+			}
+          ]
+        },
+        {
+          "premisse": [
+            {
+              "var": "livre",
+              "value": "Germinal"
+            }
+          ],
+          "conclusion": [
+            {
+              "var": "auteur",
+              "value": "Emile Zola"
+            },
+			{
+			   "var": "theme",
+			   "value": "société"
+			},
+			{
+			   "var": "epoque",
+			   "value": "19"				
+			}
+          ]
+        },
+        {
+          "premisse": [
+            {
+              "var": "livre",
+              "value": "Le Seigneur des anneaux Tome 1"
+            }
+          ],
+          "conclusion": [
+            {
+              "var": "auteur",
+              "value": "J. R. R. Tolkien"
+            },
+			{
+			   "var": "theme",
+			   "value": "fantasy"
+			},
+			{
+			   "var": "epoque",
+			   "value": "20"				
+			}
+          ]
+        },
+ 		{
+          "premisse": [
+            {
+              "var": "livre",
+              "value": "Le Seigneur des anneaux Tome 2"
+            }
+          ],
+          "conclusion": [
+            {
+              "var": "auteur",
+              "value": "J. R. R. Tolkien"
+            },
+			{
+			   "var": "theme",
+			   "value": "fantasy"
+			},
+			{
+			   "var": "epoque",
+			   "value": "20"				
+			}
+          ]
+        },
+		{
+          "premisse": [
+            {
+              "var": "livre",
+              "value": "Le Seigneur des anneaux Tome 3"
+            }
+          ],
+          "conclusion": [
+            {
+              "var": "auteur",
+              "value": "J. R. R. Tolkien"
+            },
+			{
+			   "var": "theme",
+			   "value": "fantasy"
+			},
+			{
+			   "var": "epoque",
+			   "value": "20"				
+			}
+          ]
+        }
+         
+     ]
+    },
+    {
+      "mode": "default",
+      "regles": [
+		{
+          "premisse": [
+            {
+              "var": "auteur",
+              "value": "Guy de Maupassant"
+            }
+          ],
+          "conclusion": [
+            {
+              "var": "livre",
+              "value": "Le Horla"
+            },
+			{
+              "var": "livre",
+              "value": "Boule de suif"
+            },
+			{
+              "var": "livre",
+              "value": "Bel Ami"
             }
           ]
         },
-	{
+		{
+          "premisse": [
+            {
+              "var": "auteur",
+              "value": "Emile Zola"
+            }
+          ],
+          "conclusion": [
+            {
+              "var": "livre",
+              "value": "Thérèse Raquin"
+            },
+			{
+              "var": "livre",
+              "value": "Germinal"
+            },
+			{
+              "var": "livre",
+              "value": "L'assomoir"
+            }
+          ]
+        },
+		{
+          "premisse": [
+            {
+              "var": "auteur",
+              "value": "George Orwell"
+            }
+          ],
+          "conclusion": [
+            {
+              "var": "livre",
+              "value": "1984"
+            },
+			{
+              "var": "livre",
+              "value": "La ferme des animaux"
+            }
+          ]
+        },
+		{
           "premisse": [
             {
               "var": "auteur",
@@ -228,24 +565,112 @@
           "conclusion": [
             {
               "var": "livre",
+              "value": "Ça"
+            },
+			{
+              "var": "livre",
               "value": "Shining"
+            },
+			{
+              "var": "livre",
+              "value": "22/11/63"
             }
           ]
         },
-        {
+		{
           "premisse": [
             {
-              "var": "livre",
-              "value": "Bonjour Tristesse"
+              "var": "auteur",
+              "value": "Jane Austen"
             }
           ],
           "conclusion": [
             {
-              "var": "style",
-              "value": "drame"
+              "var": "livre",
+              "value": "Orgueil et préjugés"
+            },
+			{
+              "var": "livre",
+              "value": "Raison et sentiments"
             }
           ]
-        }
+        },
+		{
+          "premisse": [
+            {
+              "var": "auteur",
+              "value": "Stendhal"
+            }
+          ],
+          "conclusion": [
+            {
+              "var": "livre",
+              "value": "Le rouge et le noir"
+            },
+			{
+              "var": "livre",
+              "value": "Le chartreuse de Parme"
+            }
+          ]
+        },
+		{
+          "premisse": [
+            {
+              "var": "auteur",
+              "value": "Boris Vian"
+            }
+          ],
+          "conclusion": [
+            {
+              "var": "livre",
+              "value": "J'irai cracher sur vos tombes"
+            },
+			{
+              "var": "livre",
+              "value": "L'écume des jours"
+            }
+          ]
+        },
+		{
+          "premisse": [
+            {
+              "var": "auteur",
+              "value": "Jules Verne"
+            }
+          ],
+          "conclusion": [
+            {
+              "var": "livre",
+              "value": "Voyage au centre de la terre"
+            },
+			{
+              "var": "livre",
+              "value": "Le tour du monde en 80 jours"
+            }
+          ]
+        },
+		{
+          "premisse": [
+            {
+              "var": "auteur",
+              "value": "J. R. R. Tolkien"
+            }
+          ],
+          "conclusion": [
+            {
+              "var": "livre",
+              "value": "Le Seigneur des anneaux Tome 1"
+            },
+			{
+              "var": "livre",
+              "value": "Le Seigneur des anneaux Tome 2"
+            },
+			{
+              "var": "livre",
+              "value": "Le Seigneur des anneaux Tome 3"
+            }
+          ]
+        }       
       ]
     }
   ]

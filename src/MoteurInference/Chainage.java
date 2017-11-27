@@ -1,7 +1,5 @@
 package MoteurInference;
 
-import java.util.ArrayList;
-
 
 /**
  * @author Valentine Rahier
@@ -19,18 +17,20 @@ public abstract class Chainage {
 	protected Paquet m_baseDeRegles;
 	protected BaseDeFait m_baseDeFaits;
 	
+	protected String m_trace;
+	protected String m_traceAbregee;
 	
 	public Chainage(Paquet baseDeRegle, BaseDeFait baseDeFait){
 		m_baseDeRegles = baseDeRegle;
 		m_baseDeFaits = baseDeFait;
+		
+		m_trace = "";
+		m_traceAbregee = "";
 	}
 	
 	public abstract boolean rechercheBut(Fait but);
 	
-	protected Regle rechercheRegleApplicable(Paquet baseDeRegle, BaseDeFait baseDeFaits, int choixRegle){
-		
-		System.out.println("Appel méthode");
-		
+	protected Regle rechercheRegleApplicable(Paquet baseDeRegle, BaseDeFait baseDeFaits, int choixRegle){		
 		
 		switch(choixRegle){
 		case LE_PLUS_DE_PREMISSES:
@@ -42,8 +42,6 @@ public abstract class Chainage {
 					positionRegle = i;
 					nbPremisses = baseDeRegle.getRegles().get(i).getPremisses().size();
 				}
-				System.out.println("Regle "+i);
-				System.out.println(baseDeRegle.getRegles().get(i));
 			}
 			
 			if(positionRegle!=(-1)){
@@ -54,34 +52,23 @@ public abstract class Chainage {
 			
 		case LES_FAITS_DEDUITS_LES_PLUS_RECENTS:
 			
+			BaseDeFait baseDeFaitsTmp = new BaseDeFait();
 			
-			int i=1;
-			BaseDeFait baseDeFaitTmp = new BaseDeFait();			
-			
-			while(baseDeFaits.size()!=baseDeFaitTmp.size()){
-			
-				baseDeFaitTmp.add(m_baseDeFaits.get(m_baseDeFaits.size()-i));
-				System.out.println("Base de faits tmp : ");
-				System.out.println(baseDeFaitTmp);
+			for(int i=m_baseDeFaits.size()-1;i>=0;i--){
 				
-				for(Regle r : baseDeRegle.getRegles()){
+				baseDeFaitsTmp.add(m_baseDeFaits.get(i));
+				
+				for(Regle r: baseDeRegle.getRegles()){
 					
-					if(r.estApplicable(baseDeFaitTmp)){
-						System.out.println("Regle retournee : ");
-						System.out.println(r);
+					if(r.estApplicable(baseDeFaitsTmp)){
 						return r;
 					}
 					
 				}
-				i++;
-				baseDeFaitTmp.add(m_baseDeFaits.get(m_baseDeFaits.size()-i));
-			}			
+				
+			}	
 			
 			break;
-
-		default:
-			
-		
 		}
 		
 		return null;
@@ -105,4 +92,12 @@ public abstract class Chainage {
 		return m_baseDeFaits;
 	}
 	
+	public String getTrace(){
+		return m_trace;
+	}
+	
+	public String getTraceAbregee(){
+		return m_traceAbregee;
+	}
+
 }
