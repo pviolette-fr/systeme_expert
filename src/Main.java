@@ -11,12 +11,12 @@ public class Main {
 		
 					
 		BaseDeFait bdf = new BaseDeFait();
-		bdf.add(new Fait("livre","Ça"));
+		bdf.add(new Fait("livre","1984"));
 		
 		
 		
 		
-		Fait but = new Fait("livre","Shining");
+		Fait but = new Fait("livre","La ferme des animaux");
 	
 		
 		System.out.println("Choix de la stratégie d'exploitation des règles : ");
@@ -36,18 +36,22 @@ public class Main {
 		case 1:
 			Chainage cav = Chainage.getChainage(Chainage.CHAINAGE_AVANT_PROF, bdr.get(0), bdf);
 			System.out.println(cav.rechercheBut(but));
+			System.out.println(cav.getTrace());
 			break;
 		case 2:
 			Chainage cavl = Chainage.getChainage(Chainage.CHAINAGE_AVANT_LARG, bdr.get(0), bdf);
-			System.out.println(cavl.rechercheBut(but));			
+			System.out.println(cavl.rechercheBut(but));
+			System.out.println(cavl.getTrace());
 			break;
 		case 3:
 			Chainage car = Chainage.getChainage(Chainage.CHAINAGE_ARRIERE, bdr.get(0), bdf);
 			System.out.println(car.rechercheBut(but));
+			System.out.println(car.getTrace());
 			break;
 		case 4:
-			MoteurGroupementParPaquets m = new MoteurGroupementParPaquets(bdr, bdf, Chainage.CHAINAGE_AVANT_LARG);
-			System.out.println(m.rechercherBut(but));
+			MoteurGroupementParPaquets m = new MoteurGroupementParPaquets(bdr, bdf, Chainage.CHAINAGE_AVANT_PROF);
+			m.rechercherBut(but);
+			System.out.println(m.getTrace());
 			break;
 		default:
 			System.out.println("Erreur");

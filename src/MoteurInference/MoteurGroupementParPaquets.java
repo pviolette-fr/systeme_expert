@@ -8,6 +8,9 @@ public class MoteurGroupementParPaquets {
 
 	private int m_mode;
 	
+	private String m_trace;
+	private String m_traceAbregee;
+	
 	private BaseDeRegle m_bdr;
 	private BaseDeFait m_baseDefaits;
 	
@@ -18,6 +21,9 @@ public class MoteurGroupementParPaquets {
 		
 		m_mode = mode;
 		
+		m_trace = "";
+		m_traceAbregee = "";
+		
 	}
 		
 	public boolean rechercherBut(Fait but){
@@ -26,24 +32,32 @@ public class MoteurGroupementParPaquets {
 		for(Paquet p : m_bdr){
 			System.out.println("Base de faits : ");
 			System.out.println(m_baseDefaits);
-			System.out.println("Nouveau paquet : ");
-			System.out.println(p);
+
 			
 			Chainage c = Chainage.getChainage(m_mode, p, m_baseDefaits);
 			
 			if(c.rechercheBut(but)){
+				m_trace+=c.getTrace();
+				m_traceAbregee+=c.getTraceAbregee();
 				return true;
 			}
 			
-			
+			m_trace+=c.getTrace();
+			m_traceAbregee+=c.getTraceAbregee();
 			m_baseDefaits = c.getBaseDeFaits();
 			
 		}
 
-		
 		return false;
 		
 	}
 	
+	public String getTrace(){
+		return m_trace;
+	}
+	
+	public String getTraceAbregee(){
+		return m_traceAbregee;
+	}
 	
 }
