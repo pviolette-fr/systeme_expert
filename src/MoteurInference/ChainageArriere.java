@@ -18,13 +18,12 @@ public class ChainageArriere extends Chainage {
 	@Override
 	public boolean rechercheBut(Fait but) {
 		Paquet baseDeRegle= m_baseDeRegles;
-		BaseDeFait baseDeFaits = new BaseDeFait(m_baseDeFaits);
 		String trace = "";
 		ArrayList<Fait> propositionsRecherchees = new ArrayList<Fait>();
 		propositionsRecherchees.add(but);
 		
 		int tour = 1;
-		while(!baseDeFaits.contains(but)){
+		while(!m_baseDeFaits.contains(but)){
 		
 			System.out.println(tour);
 			System.out.println("====BASE DE REGLES====");
@@ -33,7 +32,7 @@ public class ChainageArriere extends Chainage {
 			}
 			System.out.println("====================");
 			System.out.println("====BASE DE FAITS====");
-			for(Fait p : baseDeFaits){
+			for(Fait p : m_baseDeFaits){
 				
 				System.out.println(p);
 			}
@@ -60,8 +59,8 @@ public class ChainageArriere extends Chainage {
 			}
 			
 			for(Regle regleValide : reglesValide){
-				if(baseDeFaits.containsAll(regleValide.getPremisses())){
-					baseDeFaits.addAll(regleValide.getConclusion());
+				if(m_baseDeFaits.containsAll(regleValide.getPremisses())){
+					m_baseDeFaits.addAll(regleValide.getConclusion());
 					System.out.println("On ajoute "+regleValide.getConclusion()+" à la base de faits car "+regleValide.getPremisses()+ "appartiennent à la base de fait");
 					baseDeRegle.retirerRegle(regleValide);
 					System.out.println("On retire : "+regleValide+" à la base de règle");
@@ -78,7 +77,7 @@ public class ChainageArriere extends Chainage {
 			
 		}
 		
-		if(baseDeFaits.contains(but)){
+		if(m_baseDeFaits.contains(but)){
 			trace+=" SUCCES";
 			return true;
 		}

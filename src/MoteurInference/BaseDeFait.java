@@ -1,6 +1,6 @@
 package MoteurInference;
 
-import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -145,4 +145,19 @@ public class BaseDeFait implements List<Fait> {
         return m_content.toArray(a);
     }
 
+    
+    public String toString(){
+    	
+    	String bdf="";
+    	
+    	
+    	for(Fait fait : m_content){
+    		
+    		bdf+=fait.toString()+System.lineSeparator();
+    		
+    		
+    	}
+    	
+    	return bdf;
+    }
 }
