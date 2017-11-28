@@ -3,7 +3,6 @@ package MoteurInference;
 import java.util.LinkedList;
 
 /**
- * 
  * @author Valentine Rahier
  *
  */
