@@ -18,7 +18,7 @@
 			{
 			  "var": "theme",
 			  "value": "SF"
-			}
+			},
 			{
 			   "var": "epoque",
 			   "value": "20"
@@ -673,5 +673,9 @@
         }       
       ]
     }
-  ]
+  ],
+  "coherenceVariablesUniques": {
+		"epoque": true,
+		"auteur": true	
+	}
 }

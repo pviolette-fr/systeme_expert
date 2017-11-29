@@ -12,7 +12,7 @@ public abstract class ChainageAvant extends Chainage {
 
     /**
      * @param bdf La base de fait dans laquelle rechercher
-     * @return un paquet contenant toutes les règles applicable
+     * @return un paquet contenant toutes les règles applicables
      */
     protected Paquet getReglesApplicables(BaseDeFait bdf) {
 

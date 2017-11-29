@@ -2,10 +2,12 @@ package MoteurInference;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -20,11 +22,14 @@ import org.json.simple.JSONObject;
 public class BaseDeRegle implements List<Paquet>, JSONAware {
 
     static final String JSON_PAQUETS_KEY = "paquets";
+    static final String JSON_COHERENCE_KEY = "coherenceVariablesUniques";
 
 	private List<Paquet> m_content;
+	private Map<String, Boolean> m_coherenceVar;
 	
 	public BaseDeRegle(){
 		m_content = new LinkedList<Paquet>();
+		m_coherenceVar = new HashMap<String, Boolean>();
 	}
 	
 	public BaseDeRegle(Collection<Paquet> c){
@@ -35,7 +40,7 @@ public class BaseDeRegle implements List<Paquet>, JSONAware {
 		
 		BaseDeRegle result = new BaseDeRegle();
 		
-		for(Object obj_paquet : (JSONArray) json_bdr.get("paquets")){
+		for(Object obj_paquet : (JSONArray) json_bdr.get(JSON_PAQUETS_KEY)){
 			JSONObject json_paquet = (JSONObject) obj_paquet;
 			
 			try{
@@ -44,6 +49,8 @@ public class BaseDeRegle implements List<Paquet>, JSONAware {
 				e.printStackTrace();
 			}
 		}
+
+		result.setCoherence((HashMap<String, Boolean>)json_bdr.get(JSON_COHERENCE_KEY));
 		
 		return result;
 	}
@@ -78,123 +85,131 @@ public class BaseDeRegle implements List<Paquet>, JSONAware {
 		return res;
 	}
 
-	@Override
+	
+	public void setCoherence(Map<String, Boolean> coherence){
+		m_coherenceVar = coherence;
+	}
+	
+	public Map<String, Boolean> getCoherence(){
+		return m_coherenceVar;
+	}
+	
 	public Stream<Paquet> parallelStream() {
 		return m_content.parallelStream();
 	}
-	@Override
+	 
 	public boolean removeIf(Predicate<? super Paquet> arg0) {
 		return m_content.removeIf(arg0);
 	}
-	@Override
+	 
 	public Stream<Paquet> stream() {
 		return m_content.stream();
 	}
-	@Override
+	 
 	public void forEach(Consumer<? super Paquet> arg0) {
 		m_content.forEach(arg0);
 	}
-	@Override
+	 
 	public boolean add(Paquet p) {
 		return m_content.add(p);
 	}
-	@Override
+	 
 	public void add(int index, Paquet p) {
 		m_content.add(index, p);
 	}
-	@Override
+	 
 	public boolean addAll(Collection<? extends Paquet> c) {
 		return m_content.addAll(c);
 	}
-	@Override
+	 
 	public boolean addAll(int index, Collection<? extends Paquet> c) {
 		return m_content.addAll(index, c);
 	}
-	@Override
+	 
 	public void clear() {
 		m_content.clear();
 	}
-	@Override
+	 
 	public boolean contains(Object o) {
 		return m_content.contains(o);
 	}
-	@Override
+	 
 	public boolean containsAll(Collection<?> c) {
 		return m_content.containsAll(c);
 	}
-	@Override
+	 
 	public Paquet get(int index) {
 		return m_content.get(index);
 	}
-	@Override
+	 
 	public int indexOf(Object o) {
 		return m_content.indexOf(o);
 	}
-	@Override
+	 
 	public boolean isEmpty() {
 		return m_content.isEmpty();
 	}
-	@Override
+	 
 	public Iterator<Paquet> iterator() {
 		return m_content.iterator();
 	}
-	@Override
+	 
 	public int lastIndexOf(Object o) {
 		return m_content.lastIndexOf(o);
 	}
-	@Override
+	 
 	public ListIterator<Paquet> listIterator() {
 		return m_content.listIterator();
 	}
-	@Override
+	 
 	public ListIterator<Paquet> listIterator(int index) {
 		return m_content.listIterator(index);
 	}
-	@Override
+	 
 	public boolean remove(Object o) {
 		return m_content.remove(o);
 	}
-	@Override
+	 
 	public Paquet remove(int o) {
 		return m_content.remove(o);
 	}
-	@Override
+	 
 	public boolean removeAll(Collection<?> c) {
 		return m_content.removeAll(c);
 	}
-	@Override
+	 
 	public void replaceAll(UnaryOperator<Paquet> arg0) {
 		m_content.replaceAll(arg0);
 	}
-	@Override
+	 
 	public boolean retainAll(Collection<?> c) {
 		return m_content.retainAll(c);
 	}
-	@Override
+	 
 	public Paquet set(int index, Paquet p) {
 		return m_content.set(index, p);
 	}
-	@Override
+	 
 	public int size() {
 		return m_content.size();
 	}
-	@Override
+	 
 	public void sort(Comparator<? super Paquet> arg0) {
 		m_content.sort(arg0);
 	}
-	@Override
+	 
 	public Spliterator<Paquet> spliterator() {
 		return m_content.spliterator();
 	}
-	@Override
+	 
 	public List<Paquet> subList(int fromIndex, int toIndex) {
 		return m_content.subList(fromIndex, toIndex);
 	}
-	@Override
+	 
 	public Object[] toArray() {
 		return m_content.toArray();
 	}
-	@Override
+	 
 	public <T> T[] toArray(T[] a) {
 		return m_content.toArray(a);
 	}

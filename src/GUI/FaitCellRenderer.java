@@ -44,7 +44,6 @@ public class FaitCellRenderer extends JPanel implements ListCellRenderer<Fait> {
 
     }
 
-    @Override
     public Component getListCellRendererComponent(JList<? extends Fait> list, Fait fait, int i, boolean isSelected, boolean cellHasFocus) {
 
         this.m_valueField.setText(fait.getVal());

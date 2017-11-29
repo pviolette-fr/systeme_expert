@@ -90,7 +90,7 @@ public class PanelGestionFait extends JPanel implements ActionListener, ListSele
         m_listModele.removeAllElements();
     }
 
-    @Override
+     
     public void actionPerformed(ActionEvent actionEvent) {
         switch (actionEvent.getActionCommand()){
             case PanelAjoutFait.ADD_FAIT_ACTION :
@@ -106,7 +106,7 @@ public class PanelGestionFait extends JPanel implements ActionListener, ListSele
         }
     }
 
-    @Override
+     
     public void valueChanged(ListSelectionEvent listSelectionEvent) {
         if(m_listeFait.getSelectedIndex() != -1){
             m_addPanel.setFait(m_listModele.get(m_listeFait.getSelectedIndex()));

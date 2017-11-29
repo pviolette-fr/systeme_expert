@@ -22,7 +22,7 @@ public class TestGUI{
             );
             UIManager.setLookAndFeel(new InfoNodeLookAndFeel(theme));
         } catch (Exception e) {
-            // Si InfoNodeLookAndFeel pas disponnible, L&F par default
+            // Si InfoNodeLookAndFeel pas disponible, L&F par default
         }
         JFrame win = new MainWindow();
         win.setVisible(true);

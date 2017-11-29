@@ -6,7 +6,7 @@ package MoteurInference;
  */
 public class MoteurGroupementParPaquets {
 
-	private int m_mode;
+	private TypeChainage m_mode;
 	
 	private String m_trace;
 	private String m_traceAbregee;
@@ -14,7 +14,7 @@ public class MoteurGroupementParPaquets {
 	private BaseDeRegle m_bdr;
 	private BaseDeFait m_baseDefaits;
 	
-	public MoteurGroupementParPaquets(BaseDeRegle bdr, BaseDeFait baseDeFaits, int mode){
+	public MoteurGroupementParPaquets(BaseDeRegle bdr, BaseDeFait baseDeFaits, TypeChainage mode){
 		
 		m_bdr = new BaseDeRegle(bdr);
 		m_baseDefaits = new BaseDeFait(baseDeFaits);

@@ -6,10 +6,7 @@ package MoteurInference;
  */
 public abstract class Chainage {
 
-	//TODO : enum ???
-	public static final int CHAINAGE_AVANT_PROF = 0;
-	public static final int CHAINAGE_AVANT_LARG = 1;
-	public static final int CHAINAGE_ARRIERE = 2;
+	
 
 	//Modif Paulin 28.11.2017 : modification valeur afin d'éviter d'avoir les même valeur dans les constantes de classes
 	public static final int LE_PLUS_DE_PREMISSES = 3;
@@ -69,7 +66,7 @@ public abstract class Chainage {
 				}
 			}
 		}
-		return null; //Aucune regle trouvé
+		return null; //Aucune règle trouvée
 	}
 
 	/**
@@ -92,13 +89,13 @@ public abstract class Chainage {
 	}
 
 	
-	public static Chainage getChainage(int mode, Paquet baseDeRegle, BaseDeFait baseDeFait){
+	public static Chainage getChainage(TypeChainage mode, Paquet baseDeRegle, BaseDeFait baseDeFait){
 		switch(mode){
-		case CHAINAGE_AVANT_PROF:
+		case Chainage_Avant_Prof:
 			return new ChainageAvantProfondeur(baseDeRegle, baseDeFait);
-		case CHAINAGE_AVANT_LARG:
+		case Chainage_Avant_Larg:
 			return new ChainageAvantLargeur(baseDeRegle, baseDeFait);
-		case CHAINAGE_ARRIERE:
+		case Chainage_Arriere:
 			return new ChainageArriere(baseDeRegle,baseDeFait);
 		default:
 			return null;
