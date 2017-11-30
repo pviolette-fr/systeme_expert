@@ -1,24 +1,24 @@
 package MoteurInference;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+import java.util.function.Consumer;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 
-public class Paquet {
+public class Paquet implements Iterable<Regle> {
 
 	static final String JSON_MODE_KEY = "mode";
 	static final String JSON__REGLES_KEY = "regles";
 	
 	private List<Regle> m_regles;
-	
-	public Paquet(){
+    ModeChainage m_modeChainagePreferenciel;
+
+    public Paquet(){
 		
 		m_regles = new ArrayList<Regle>();
-		
+		m_modeChainagePreferenciel = ModeChainage.DEFAULT;
 	}
 	
 	public Paquet(List<Regle> regles){
@@ -26,6 +26,11 @@ public class Paquet {
 		m_regles = new ArrayList<Regle>(regles);
 		
 	}
+
+	public Paquet(List<Regle> regles, ModeChainage modeChainagePreferentielle){
+	    m_regles = new ArrayList<>(regles);
+	    m_modeChainagePreferenciel = modeChainagePreferentielle;
+    }
 	
 	public void ajouterRegle(Regle r){
 		
@@ -42,13 +47,22 @@ public class Paquet {
 		return m_regles;
 		
 	}
-	
+
 	public int size(){
 		return m_regles.size();
 	}
-	
+
+    public ModeChainage getModeChainagePreferenciel() {
+        return m_modeChainagePreferenciel;
+    }
+
+    public void setModeChainagePreferenciel(ModeChainage mCh){
+	    m_modeChainagePreferenciel = mCh;
+    }
+
 	public String toString(){
-		String res = "=============PAQUET=============" + System.lineSeparator();
+		String res = "=============PAQUET=============" + System.lineSeparator()
+                + "Mode Preferentiel :\t" + m_modeChainagePreferenciel + System.lineSeparator();
 		for(Regle r : m_regles){
 			res += "\t*" + r.toString() + System.lineSeparator();
 		}		
@@ -59,12 +73,17 @@ public class Paquet {
 	public static Paquet parseJSON(JSONObject obj){
 		
 		List<Regle> regles = new LinkedList<Regle>();
-		JSONArray json_regles = (JSONArray) obj.get("regles");
-		for(Object o : json_regles){
-			regles.add( Regle.parseJSON((JSONObject) o));
+		JSONArray json_regles = (JSONArray) obj.get(JSON__REGLES_KEY);
+		for(Object o : json_regles) {
+            regles.add(Regle.parseJSON((JSONObject) o));
+        }
+
+		ModeChainage mCh = ModeChainage.parseString(((String) obj.get(JSON_MODE_KEY)).toUpperCase());
+		if(mCh == null){
+			System.err.println("Paquet.parseJSON : no mode specified. Setting DEFAULT");
+			mCh = ModeChainage.DEFAULT;
 		}
-		
-		return new Paquet(regles);
+		return new Paquet(regles, mCh);
 	}
 
 	public JSONObject toJSONObject(){
@@ -76,10 +95,25 @@ public class Paquet {
 			regles.add(r.toJSONObject());
 		}
 
-		json.put(JSON_MODE_KEY, "default");
+		json.put(JSON_MODE_KEY, m_modeChainagePreferenciel);
 		json.put(JSON__REGLES_KEY, regles);
 
 
 		return json;
 	}
+
+    @Override
+    public Iterator<Regle> iterator() {
+        return m_regles.iterator();
+    }
+
+    @Override
+    public void forEach(Consumer<? super Regle> consumer) {
+        m_regles.forEach(consumer);
+    }
+
+    @Override
+    public Spliterator<Regle> spliterator() {
+        return m_regles.spliterator();
+    }
 }

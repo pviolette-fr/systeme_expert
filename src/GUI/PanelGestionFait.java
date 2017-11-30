@@ -2,14 +2,11 @@ package GUI;
 
 import MoteurInference.Fait;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.DefaultListModel;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
@@ -40,10 +37,12 @@ public class PanelGestionFait extends JPanel implements ActionListener, ListSele
         m_listeFait = new JList<>(m_listModele);
         m_listeFait.addListSelectionListener(this);
 
-        this.add(m_listeFait, BorderLayout.CENTER);
+        JScrollPane scrollListe = new JScrollPane(m_listeFait);
+        scrollListe.setPreferredSize(new Dimension(100,300));
+        this.add(scrollListe, BorderLayout.CENTER);
 
-        this.add(m_addPanel, BorderLayout.SOUTH);
-        this.add(m_clear, BorderLayout.NORTH);    }
+        this.add(m_addPanel, BorderLayout.NORTH);
+        this.add(m_clear, BorderLayout.SOUTH);    }
 
     /**
      * Ajoute le fait donné dans la liste.
@@ -59,6 +58,8 @@ public class PanelGestionFait extends JPanel implements ActionListener, ListSele
             else{
                 m_listModele.addElement(f);
             }
+            m_addPanel.clear();
+
         }
     }
 
@@ -88,6 +89,7 @@ public class PanelGestionFait extends JPanel implements ActionListener, ListSele
 
     public void clear(){
         m_listModele.removeAllElements();
+        m_addPanel.clear();
     }
 
      

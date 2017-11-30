@@ -1,8 +1,9 @@
 package GUI;
 
+import MoteurInference.BaseDeRegle;
+import Utilities.CreationBDR;
 import net.infonode.gui.laf.InfoNodeLookAndFeel;
 import net.infonode.gui.laf.InfoNodeLookAndFeelTheme;
-import net.infonode.gui.laf.InfoNodeLookAndFeelThemes;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +25,9 @@ public class TestGUI{
         } catch (Exception e) {
             // Si InfoNodeLookAndFeel pas disponible, L&F par default
         }
-        JFrame win = new MainWindow();
+        BaseDeRegle bdr = CreationBDR.creerBaseDeRegle("base_de_regle.json");
+
+        JFrame win = new MainWindow(bdr);
         win.setVisible(true);
     }
 

@@ -2,7 +2,8 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 
 import MoteurInference.*;
-import GUI.MainWindow;
+import Utilities.CreationBDR;
+
 public class Main {
 
 	/**
@@ -25,7 +26,9 @@ public class Main {
 		
 		
 		BaseDeRegle bdr = CreationBDR.creerBaseDeRegle("base_de_regle.json");
-		
+
+		System.out.println(bdr);
+
 		System.out.println(Coherence.estCoherent(bdr));
 		Scanner scan = new Scanner(System.in);
 		int reponse = scan.nextInt();
@@ -33,22 +36,22 @@ public class Main {
 		System.out.println(reponse);
 		switch(reponse){
 		case 1:
-			Chainage cav = Chainage.getChainage(TypeChainage.Chainage_Avant_Prof, bdr.get(0), bdf);
+			Chainage cav = Chainage.getChainage(ModeChainage.AVANT_PROFONDEUR, bdr.get(0), bdf);
 			System.out.println(cav.rechercheBut(but));
 			System.out.println(cav.getTrace());
 			break;
 		case 2:
-			Chainage cavl = Chainage.getChainage(TypeChainage.Chainage_Avant_Larg, bdr.get(0), bdf);
+			Chainage cavl = Chainage.getChainage(ModeChainage.AVANT_LARGEUR, bdr.get(0), bdf);
 			System.out.println(cavl.rechercheBut(but));
 			System.out.println(cavl.getTrace());
 			break;
 		case 3:
-			Chainage car = Chainage.getChainage(TypeChainage.Chainage_Arriere, bdr.get(0), bdf);
+			Chainage car = Chainage.getChainage(ModeChainage.ARRIERE, bdr.get(0), bdf);
 			System.out.println(car.rechercheBut(but));
 			System.out.println(car.getTrace());
 			break;
 		case 4:
-			MoteurGroupementParPaquets m = new MoteurGroupementParPaquets(bdr, bdf,TypeChainage.Chainage_Avant_Larg);
+			MoteurGroupementParPaquets m = new MoteurGroupementParPaquets(bdr, bdf, ModeChainage.DEFAULT);
 			m.rechercherBut(but);
 			System.out.println(m.getTraceAbregee());
 			break;

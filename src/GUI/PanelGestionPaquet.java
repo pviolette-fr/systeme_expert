@@ -1,10 +1,12 @@
 package GUI;
 
+import MoteurInference.ModeChainage;
 import MoteurInference.Paquet;
 import MoteurInference.Regle;
-//import com.sun.org.apache.regexp.internal.RE;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,22 +14,21 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Insets;
 
-import java.util.List;
-import java.util.LinkedList;
-
-public class PanelGestionPaquet extends JPanel implements ActionListener{
+public class PanelGestionPaquet extends JPanel implements ActionListener, ListSelectionListener{
 
     static final String ACTION_CLEAR_RULES = "clear_rules";
+    static final String ACTION_ADD_PAQUET = "add_paquet";
 
     JList<Regle> m_listeRegles;
     DefaultListModel<Regle> m_listModelRegle;
 
     PanelAjoutRegle m_panelRegle;
 
-    JTextField m_nameField;
     JButton m_clearRules;
 
     JButton m_confirmPaquet;
+
+    JComboBox<ModeChainage> m_modePreferentielChainage;
 
     public PanelGestionPaquet() {
 
@@ -37,16 +38,28 @@ public class PanelGestionPaquet extends JPanel implements ActionListener{
 
         m_listModelRegle = new DefaultListModel<>();
         m_listeRegles = new JList<>(m_listModelRegle);
+        m_listeRegles.addListSelectionListener(this);
 
         m_panelRegle = new PanelAjoutRegle(this);
 
-        m_nameField = new JTextField("nom_paquet");
+        m_modePreferentielChainage = new JComboBox<>();
+
+        for(ModeChainage mCh : ModeChainage.values()){
+            m_modePreferentielChainage.addItem(mCh);
+        }
+
+        m_modePreferentielChainage.setSelectedItem(ModeChainage.DEFAULT);
 
         m_clearRules = new JButton("Clear rules");
         m_clearRules.addActionListener(this);
         m_clearRules.setActionCommand(ACTION_CLEAR_RULES);
 
         m_confirmPaquet = new JButton("Ajouter ce paquet à la base de règle");
+        m_confirmPaquet.setActionCommand(ACTION_ADD_PAQUET);
+        //TODO REMOVE TMP
+        m_confirmPaquet.addActionListener(this);
+        //TODO REMOVE TMP
+
 
         GridBagConstraints c = new GridBagConstraints();
 
@@ -60,11 +73,13 @@ public class PanelGestionPaquet extends JPanel implements ActionListener{
         c.weighty = 3;
         c.weightx = 1;
 
-        this.add(m_listeRegles, c);
+        JScrollPane scrollPaneListeRegle = new JScrollPane(m_listeRegles);
+
+        this.add(scrollPaneListeRegle, c);
 
         c.weightx = 2;
         c.gridx = 2;
-        c.gridwidth = 2;
+        c.gridwidth = 3;
         this.add(m_panelRegle, c);
 
         c.gridwidth = 1;
@@ -84,11 +99,15 @@ public class PanelGestionPaquet extends JPanel implements ActionListener{
         this.add(m_clearRules, c);
 
         c.gridx = 2;
-
-        this.add(m_nameField, c);
+        c.fill = GridBagConstraints.NONE;
+        this.add(new JLabel("Mode de chainage préferentiel"), c);
 
         c.gridx = 3;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        this.add(m_modePreferentielChainage, c);
 
+        c.gridx = 4;
+        c.weightx = 2;
         this.add(m_confirmPaquet, c);
 
     }
@@ -106,6 +125,9 @@ public class PanelGestionPaquet extends JPanel implements ActionListener{
             case ACTION_CLEAR_RULES:
                 clearRules();
                 break;
+            case ACTION_ADD_PAQUET:
+                System.out.println(getPaquet());
+                System.out.println(getPaquet().toJSONObject());
         }
     }
 
@@ -114,10 +136,34 @@ public class PanelGestionPaquet extends JPanel implements ActionListener{
         for(int i = 0; i < m_listModelRegle.size(); ++i){
             paquet.ajouterRegle(m_listModelRegle.get(i));
         }
+        paquet.setModeChainagePreferenciel(m_modePreferentielChainage.getItemAt(m_modePreferentielChainage.getSelectedIndex()));
         return paquet;
+    }
+
+    public void loadPaquet(Paquet p){
+        this.clear();
+        System.out.println("Loading paquet");
+        System.out.println(p);
+        m_modePreferentielChainage.setSelectedItem(p.getModeChainagePreferenciel());
+        for(Regle r : p){
+            m_listModelRegle.addElement(r);
+        }
+    }
+
+    public void clear(){
+        clearRules();
+        m_modePreferentielChainage.setSelectedItem(ModeChainage.DEFAULT);
+        m_panelRegle.clear();
     }
 
     public void clearRules(){
         m_listModelRegle.removeAllElements();
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent listSelectionEvent) {
+        if(m_listeRegles.getSelectedIndex() != -1){
+            m_panelRegle.setRegle(m_listModelRegle.get(m_listeRegles.getSelectedIndex()));
+        }
     }
 }

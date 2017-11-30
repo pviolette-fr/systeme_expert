@@ -100,11 +100,17 @@ public class PanelAjoutRegle extends JPanel{
         }
     }
 
+    public void clear(){
+        m_panelConclusion.clear();
+        m_panelPremisses.clear();
+    }
+
     public Regle getRegle(){
         return new Regle(m_panelPremisses.getListFait(), m_panelConclusion.getListFait());
     }
 
     public void setRegle(Regle r){
+        clear();
         for(Fait p : r.getPremisses()){
             m_panelPremisses.ajouterFait(p);
         }
