@@ -44,6 +44,14 @@ public class PanelGestionFait extends JPanel implements ActionListener, ListSele
         this.add(m_addPanel, BorderLayout.NORTH);
         this.add(m_clear, BorderLayout.SOUTH);    }
 
+    public DefaultListModel<Fait> getListModele() {
+        return m_listModele;
+    }
+
+    public void setListModele(DefaultListModel<Fait> listModele) {
+        m_listModele = listModele;
+    }
+
     /**
      * Ajoute le fait donné dans la liste.
      * @param f le fait à ajouter

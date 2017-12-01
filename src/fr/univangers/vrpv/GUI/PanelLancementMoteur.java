@@ -24,7 +24,6 @@ public class PanelLancementMoteur extends JPanel {
 
     MoteurController m_controller;
 
-
     public PanelLancementMoteur(MoteurController controller) {
         m_controller = controller;
         m_controller.setPanel(this);
@@ -32,5 +31,9 @@ public class PanelLancementMoteur extends JPanel {
 
     public void setListModelPaquet(DefaultListModel<Paquet> listModelPaquet){
         m_listModelPaquet = listModelPaquet;
+    }
+
+    public PanelGestionFait getPanelBaseDeFait() {
+        return m_panelBaseDeFait;
     }
 }

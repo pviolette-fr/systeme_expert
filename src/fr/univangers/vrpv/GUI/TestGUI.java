@@ -1,7 +1,7 @@
 package fr.univangers.vrpv.GUI;
 
 import fr.univangers.vrpv.MoteurInference.BaseDeRegle;
-import fr.univangers.vrpv.Utilities.CreationBDR;
+import fr.univangers.vrpv.MoteurInference.MoteurInferenceIO;
 import net.infonode.gui.laf.InfoNodeLookAndFeel;
 import net.infonode.gui.laf.InfoNodeLookAndFeelTheme;
 
@@ -25,7 +25,7 @@ public class TestGUI{
         } catch (Exception e) {
             // Si InfoNodeLookAndFeel pas disponible, L&F par default
         }
-        BaseDeRegle bdr = CreationBDR.creerBaseDeRegle("base_de_regle.json");
+        BaseDeRegle bdr = MoteurInferenceIO.creerBaseDeRegle("base_de_regle.json");
 
         JFrame win = new MainWindow(bdr);
         win.setVisible(true);

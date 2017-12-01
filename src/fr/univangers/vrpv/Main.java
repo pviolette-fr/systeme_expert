@@ -3,7 +3,7 @@ package fr.univangers.vrpv;
 import java.util.Scanner;
 
 import fr.univangers.vrpv.MoteurInference.*;
-import fr.univangers.vrpv.Utilities.CreationBDR;
+import fr.univangers.vrpv.MoteurInference.MoteurInferenceIO;
 
 public class Main {
 
@@ -26,7 +26,7 @@ public class Main {
 		System.out.println("4: Groupement par paquets");
 		
 		
-		BaseDeRegle bdr = CreationBDR.creerBaseDeRegle("base_de_regle.json");
+		BaseDeRegle bdr = MoteurInferenceIO.creerBaseDeRegle("base_de_regle.json");
 
 		System.out.println(bdr);
 

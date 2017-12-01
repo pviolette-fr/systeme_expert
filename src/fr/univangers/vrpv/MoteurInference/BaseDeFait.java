@@ -1,6 +1,9 @@
 package fr.univangers.vrpv.MoteurInference;
 
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -34,12 +37,19 @@ public class BaseDeFait implements List<Fait> {
 
             bdf+=fait.toString()+System.lineSeparator();
 
-
         }
-
         return bdf;
     }
 
+    public static BaseDeFait parseJSON(JSONObject obj){
+        JSONArray json_listFait = (JSONArray) obj.get("faits");
+        BaseDeFait bdf = new BaseDeFait();
+        for(Object o : json_listFait){
+            JSONObject f = (JSONObject) o;
+            bdf.add(Fait.parseJSON(f));
+        }
+        return bdf;
+    }
      
     public Stream<Fait> parallelStream() {
         return m_content.parallelStream();
