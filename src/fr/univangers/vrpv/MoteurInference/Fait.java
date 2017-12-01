@@ -1,15 +1,14 @@
 package fr.univangers.vrpv.MoteurInference;
 
+import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
-
 
 /**
  * @author Valentine Rahier
  *
  */
 
-public class Fait {
-
+public class Fait implements JSONAware {
 	static final String JSON_VAR_KEY = "var";
 	static final String JSON_VALUE_KEY = "value";
 	
@@ -17,7 +16,6 @@ public class Fait {
 	private String m_valeur;
 
     /**
-     *
      * @param variable le nom de la variable associé
      * @param valeur la valeur de la variable
      */
@@ -60,7 +58,12 @@ public class Fait {
 	public JSONObject toJSONObject(){
 		JSONObject json = new JSONObject();
 		json.put(JSON_VAR_KEY, m_variable);
-		json.put(JSON_VALUE_KEY, m_variable);
+		json.put(JSON_VALUE_KEY, m_valeur);
 		return json;
+	}
+
+	@Override
+	public String toJSONString() {
+		return toJSONObject().toJSONString();
 	}
 }

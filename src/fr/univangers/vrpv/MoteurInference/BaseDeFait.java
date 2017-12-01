@@ -2,6 +2,7 @@ package fr.univangers.vrpv.MoteurInference;
 
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 
 import java.util.Collection;
@@ -16,7 +17,9 @@ import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 
-public class BaseDeFait implements List<Fait> {
+public class BaseDeFait implements List<Fait>, JSONAware {
+
+    static final String JSON_BDF_LIST_FACTS_KEY = "facts";
 
     List<Fait> m_content;
 
@@ -29,9 +32,8 @@ public class BaseDeFait implements List<Fait> {
     }
 
     public String toString(){
-
         String bdf="";
-        
+
         for(Fait fait : m_content){
 
             bdf+=fait.toString()+System.lineSeparator();
@@ -41,7 +43,7 @@ public class BaseDeFait implements List<Fait> {
     }
 
     public static BaseDeFait parseJSON(JSONObject obj){
-        JSONArray json_listFait = (JSONArray) obj.get("faits");
+        JSONArray json_listFait = (JSONArray) obj.get(JSON_BDF_LIST_FACTS_KEY);
         BaseDeFait bdf = new BaseDeFait();
         for(Object o : json_listFait){
             JSONObject f = (JSONObject) o;
@@ -49,7 +51,25 @@ public class BaseDeFait implements List<Fait> {
         }
         return bdf;
     }
-     
+
+    public JSONObject toJSONObject(){
+        JSONObject res = new JSONObject();
+        JSONArray faits = new JSONArray();
+
+        for(Fait f : this){
+            faits.add(f.toJSONObject());
+        }
+
+        res.put(JSON_BDF_LIST_FACTS_KEY, faits);
+
+        return res;
+    }
+
+    @Override
+    public String toJSONString() {
+        return toJSONObject().toJSONString();
+    }
+
     public Stream<Fait> parallelStream() {
         return m_content.parallelStream();
     }
@@ -169,5 +189,4 @@ public class BaseDeFait implements List<Fait> {
     public <T> T[] toArray(T[] a) {
         return m_content.toArray(a);
     }
-
 }

@@ -1,5 +1,6 @@
 package fr.univangers.vrpv.GUI;
 
+import fr.univangers.vrpv.Controller.MoteurController;
 import fr.univangers.vrpv.MoteurInference.ModeChainage;
 import fr.univangers.vrpv.MoteurInference.Paquet;
 import fr.univangers.vrpv.MoteurInference.Regle;
@@ -17,7 +18,6 @@ import java.awt.Insets;
 public class PanelGestionPaquet extends JPanel implements ActionListener, ListSelectionListener{
 
     static final String ACTION_CLEAR_RULES = "clear_rules";
-    static final String ACTION_ADD_PAQUET = "add_paquet";
 
     JList<Regle> m_listeRegles;
     DefaultListModel<Regle> m_listModelRegle;
@@ -30,7 +30,7 @@ public class PanelGestionPaquet extends JPanel implements ActionListener, ListSe
 
     JComboBox<ModeChainage> m_modePreferentielChainage;
 
-    public PanelGestionPaquet() {
+    public PanelGestionPaquet(MoteurController controller) {
 
         GridBagLayout layout = new GridBagLayout();
 
@@ -55,11 +55,8 @@ public class PanelGestionPaquet extends JPanel implements ActionListener, ListSe
         m_clearRules.setActionCommand(ACTION_CLEAR_RULES);
 
         m_confirmPaquet = new JButton("Ajouter ce paquet à la base de règle");
-        m_confirmPaquet.setActionCommand(ACTION_ADD_PAQUET);
-        //TODO REMOVE TMP
-        m_confirmPaquet.addActionListener(this);
-        //TODO REMOVE TMP
-
+        m_confirmPaquet.setActionCommand(MoteurController.ACTION_ADD_PAQUET);
+        m_confirmPaquet.addActionListener(controller);
 
         GridBagConstraints c = new GridBagConstraints();
 
@@ -125,9 +122,6 @@ public class PanelGestionPaquet extends JPanel implements ActionListener, ListSe
             case ACTION_CLEAR_RULES:
                 clearRules();
                 break;
-            case ACTION_ADD_PAQUET:
-                System.out.println(getPaquet());
-                System.out.println(getPaquet().toJSONObject());
         }
     }
 

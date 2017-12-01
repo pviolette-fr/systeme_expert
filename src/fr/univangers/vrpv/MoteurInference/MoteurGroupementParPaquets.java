@@ -22,7 +22,6 @@ public class MoteurGroupementParPaquets {
     static final int PRIORITE_PAQUET = 1;
 
     public MoteurGroupementParPaquets(BaseDeRegle bdr, BaseDeFait baseDeFaits, ModeChainage mode) {
-
         m_bdr = new BaseDeRegle(bdr);
         m_baseDefaits = new BaseDeFait(baseDeFaits);
 
@@ -31,7 +30,6 @@ public class MoteurGroupementParPaquets {
 
         m_trace = "";
         m_traceAbregee = "";
-
     }
 
     public MoteurGroupementParPaquets(BaseDeRegle bdr, BaseDeFait baseDeFaits, ModeChainage mode, int priorite) {
@@ -43,9 +41,7 @@ public class MoteurGroupementParPaquets {
 
         m_trace = "";
         m_traceAbregee = "";
-
     }
-
 
     private ModeChainage selectMode(ModeChainage modePrefPaquet) {
         if (m_mode == ModeChainage.DEFAULT && modePrefPaquet == ModeChainage.DEFAULT) {
@@ -68,7 +64,6 @@ public class MoteurGroupementParPaquets {
     }
 
     public boolean rechercherBut(Fait but) {
-
         for (Paquet p : m_bdr) {
             System.out.println("Base de faits : ");
             System.out.println(m_baseDefaits);
@@ -92,9 +87,7 @@ public class MoteurGroupementParPaquets {
             }
 
         }
-
         return false;
-
     }
     
     public boolean estCoherenteBdr(){

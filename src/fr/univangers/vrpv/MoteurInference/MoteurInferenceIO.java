@@ -1,10 +1,6 @@
 package fr.univangers.vrpv.MoteurInference;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -26,6 +22,16 @@ public class MoteurInferenceIO {
             content += line;
         }
         return content;
+    }
+
+    public static void writeContentToFile(String filepath, String content) throws IOException{
+        System.out.println(content);
+        OutputStream out = new FileOutputStream(filepath);
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
+
+        writer.write(content);
+
+        writer.close();
     }
 
     public static BaseDeRegle creerBaseDeRegle(String file) {
@@ -60,6 +66,14 @@ public class MoteurInferenceIO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static void exporterBaseDeRegle(String filepath, BaseDeRegle bdr) throws IOException{
+        writeContentToFile(filepath, bdr.toJSONString());
+    }
+
+    public static void exporterBaseDeFait(String filepath, BaseDeFait bdf) throws IOException{
+        writeContentToFile(filepath, bdf.toJSONString());
     }
 
 }
