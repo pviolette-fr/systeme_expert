@@ -1,10 +1,9 @@
-package GUI;
+package fr.univangers.vrpv.GUI;
 
-import MoteurInference.Fait;
-import MoteurInference.Regle;
+import fr.univangers.vrpv.MoteurInference.Fait;
+import fr.univangers.vrpv.MoteurInference.Regle;
 
 import javax.swing.*;
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;

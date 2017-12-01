@@ -1,4 +1,4 @@
-package MoteurInference;
+package fr.univangers.vrpv.MoteurInference;
 
 public abstract class ChainageAvant extends Chainage {
 

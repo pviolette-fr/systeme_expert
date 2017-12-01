@@ -1,6 +1,6 @@
-package GUI;
+package fr.univangers.vrpv.GUI;
 
-import MoteurInference.Fait;
+import fr.univangers.vrpv.MoteurInference.Fait;
 
 import javax.swing.*;
 import java.awt.*;

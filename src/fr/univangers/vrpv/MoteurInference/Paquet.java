@@ -1,4 +1,4 @@
-package MoteurInference;
+package fr.univangers.vrpv.MoteurInference;
 
 import java.util.*;
 import java.util.function.Consumer;

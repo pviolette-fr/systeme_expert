@@ -1,4 +1,4 @@
-package Utilities;
+package fr.univangers.vrpv.Utilities;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import MoteurInference.BaseDeRegle;
+import fr.univangers.vrpv.MoteurInference.BaseDeRegle;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;

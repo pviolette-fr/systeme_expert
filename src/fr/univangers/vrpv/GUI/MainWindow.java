@@ -1,12 +1,10 @@
-package GUI;
+package fr.univangers.vrpv.GUI;
 
-import MoteurInference.BaseDeRegle;
+import fr.univangers.vrpv.MoteurInference.BaseDeRegle;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class MainWindow extends JFrame {
-
 
 
     public MainWindow(BaseDeRegle BdR) {

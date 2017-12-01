@@ -1,7 +1,4 @@
-package MoteurInference;
-
-import MoteurInference.BaseDeFait;
-import MoteurInference.Fait;
+package fr.univangers.vrpv.MoteurInference;
 
 import java.util.ArrayList;
 import java.util.List;

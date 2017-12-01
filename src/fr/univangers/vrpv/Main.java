@@ -1,8 +1,9 @@
-import java.util.Map.Entry;
+package fr.univangers.vrpv;
+
 import java.util.Scanner;
 
-import MoteurInference.*;
-import Utilities.CreationBDR;
+import fr.univangers.vrpv.MoteurInference.*;
+import fr.univangers.vrpv.Utilities.CreationBDR;
 
 public class Main {
 

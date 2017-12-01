@@ -1,10 +1,4 @@
-package MoteurInference;
-
-
-import java.util.LinkedList;
-
-import MoteurInference.BaseDeFait;
-import MoteurInference.Fait;
+package fr.univangers.vrpv.MoteurInference;
 
 
 /**

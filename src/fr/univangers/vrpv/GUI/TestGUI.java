@@ -1,7 +1,7 @@
-package GUI;
+package fr.univangers.vrpv.GUI;
 
-import MoteurInference.BaseDeRegle;
-import Utilities.CreationBDR;
+import fr.univangers.vrpv.MoteurInference.BaseDeRegle;
+import fr.univangers.vrpv.Utilities.CreationBDR;
 import net.infonode.gui.laf.InfoNodeLookAndFeel;
 import net.infonode.gui.laf.InfoNodeLookAndFeelTheme;
 

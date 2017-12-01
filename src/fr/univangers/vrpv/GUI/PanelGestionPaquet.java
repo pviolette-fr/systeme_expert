@@ -1,8 +1,8 @@
-package GUI;
+package fr.univangers.vrpv.GUI;
 
-import MoteurInference.ModeChainage;
-import MoteurInference.Paquet;
-import MoteurInference.Regle;
+import fr.univangers.vrpv.MoteurInference.ModeChainage;
+import fr.univangers.vrpv.MoteurInference.Paquet;
+import fr.univangers.vrpv.MoteurInference.Regle;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
