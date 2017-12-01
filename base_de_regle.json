@@ -491,7 +491,7 @@
      ]
     },
     {
-      "mode": "default",
+      "mode": "DEFAULT",
       "regles": [
 		{
           "premisse": [

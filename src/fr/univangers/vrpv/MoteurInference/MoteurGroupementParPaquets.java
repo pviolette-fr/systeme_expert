@@ -1,5 +1,7 @@
 package fr.univangers.vrpv.MoteurInference;
 
+import java.util.Set;
+
 
 /**
  * @author Valentine Rahier
@@ -82,12 +84,71 @@ public class MoteurGroupementParPaquets {
             m_trace += c.getTrace();
             m_traceAbregee += c.getTraceAbregee();
             m_baseDefaits = c.getBaseDeFaits();
+            
+            if(!estCoherenteBdf()){
+            	m_trace+="Attention la base de fait : \r\n"+
+            			m_baseDefaits+
+            			" n'est pas cohérente.\r\n";
+            }
 
         }
 
         return false;
 
     }
+    
+    public boolean estCoherenteBdr(){
+		Set<String> variablesUniques = m_bdr.getCoherence().keySet();
+		
+		for(Paquet p : m_bdr){
+			
+			for(Regle r : p.getRegles()){
+				
+				for(String varUnique : variablesUniques){
+					
+					int nbApparitions = 0;
+					
+					for(Fait conclusion : r.getConclusion()){
+						
+						if(conclusion.getVar().equals(varUnique)){
+							nbApparitions++;
+						}
+					}
+					
+					if(nbApparitions>1){
+						return false;
+					}
+					
+					
+				}
+				
+			}
+		}
+		return true;
+	}
+	
+	public boolean estCoherenteBdf(){
+
+		Set<String> variablesUniques = m_bdr.getCoherence().keySet();
+		
+		for(String varUnique : variablesUniques){
+			
+			int nbApparitions = 0;
+			
+			for(Fait f : m_baseDefaits){
+			
+				if(f.getVar().equals(varUnique)){
+					nbApparitions++;
+				}
+				
+			}
+			
+			if(nbApparitions>1){
+				return false;
+			}
+		}
+		return true;
+	}
 
     public String getTrace() {
         return m_trace;

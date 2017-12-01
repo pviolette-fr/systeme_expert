@@ -13,10 +13,10 @@ public class Main {
 	public static void main(String[] args) {
 					
 		BaseDeFait bdf = new BaseDeFait();
-		bdf.add(new Fait("livre","1984"));
+		bdf.add(new Fait("epoque","20"));
 				
 		
-		Fait but = new Fait("livre","La ferme des animaux");
+		Fait but = new Fait("livre","11/22/63");
 	
 		
 		System.out.println("Choix de la stratégie d'exploitation des règles : ");
@@ -29,8 +29,10 @@ public class Main {
 		BaseDeRegle bdr = MoteurInferenceIO.creerBaseDeRegle("base_de_regle.json");
 
 		System.out.println(bdr);
+		
+		System.out.println(bdr.getCoherence());
 
-		System.out.println(Coherence.estCoherent(bdr));
+
 		Scanner scan = new Scanner(System.in);
 		int reponse = scan.nextInt();
 		scan.close();
@@ -54,7 +56,7 @@ public class Main {
 		case 4:
 			MoteurGroupementParPaquets m = new MoteurGroupementParPaquets(bdr, bdf, ModeChainage.DEFAULT);
 			m.rechercherBut(but);
-			System.out.println(m.getTraceAbregee());
+			System.out.println(m.getTrace());
 			break;
 		default:
 			System.out.println("Erreur");

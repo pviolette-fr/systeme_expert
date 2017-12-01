@@ -1,5 +1,7 @@
 package fr.univangers.vrpv.MoteurInference;
 
+import java.util.Set;
+
 
 /**
  * @author Valentine Rahier
@@ -62,7 +64,7 @@ public abstract class Chainage {
                 }
             }
         }
-        return null; //Aucune regle trouvé
+        return null; //Aucune regle trouvée
     }
 
     /**
@@ -100,6 +102,8 @@ public abstract class Chainage {
                 return Chainage.getChainage(ModeChainage.getDefault(), baseDeRegle, baseDeFait);
         }
     }
+    
+
 
     public BaseDeFait getBaseDeFaits() {
         return m_baseDeFaits;

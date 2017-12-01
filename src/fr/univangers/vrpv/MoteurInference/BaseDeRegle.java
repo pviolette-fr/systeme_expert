@@ -32,8 +32,15 @@ public class BaseDeRegle implements List<Paquet>, JSONAware {
 		m_coherenceVar = new HashMap<String, Boolean>();
 	}
 	
+	public BaseDeRegle(BaseDeRegle other){
+		m_content = other.m_content;
+		m_coherenceVar = other.m_coherenceVar;
+	}
+	
+	
 	public BaseDeRegle(Collection<Paquet> c){
 		m_content = new LinkedList<Paquet>(c);
+		
 	}
 	
 	public static BaseDeRegle parseJSON(JSONObject json_bdr){
@@ -50,7 +57,7 @@ public class BaseDeRegle implements List<Paquet>, JSONAware {
 			}
 		}
 
-		result.setCoherence((HashMap<String, Boolean>)json_bdr.get(JSON_COHERENCE_KEY));
+		result.setCoherence(new HashMap<String, Boolean>((JSONObject) json_bdr.get(JSON_COHERENCE_KEY)));
 		
 		return result;
 	}

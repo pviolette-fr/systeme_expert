@@ -9,6 +9,7 @@ import java.util.List;
 public class ChainageArriere extends Chainage {
 	
 	
+	private static int NB_ITERATIONS_MAX = 100;
 
 	public ChainageArriere(Paquet baseDeRegle, BaseDeFait baseDeFait) {
 		super(baseDeRegle, baseDeFait);
@@ -16,6 +17,8 @@ public class ChainageArriere extends Chainage {
 
 	@Override
 	public boolean rechercheBut(Fait but) {
+		
+		int i =0;
 		m_trace+="But : "+but+"\r\n"+
 				"Chainage arrière profondeur\r\n";
 		
@@ -24,7 +27,7 @@ public class ChainageArriere extends Chainage {
 		List<Fait> propositionsRecherchees = new ArrayList<Fait>();
 		propositionsRecherchees.add(but);
 
-		while(!m_baseDeFaits.contains(but)){
+		while(!m_baseDeFaits.contains(but)&&(i<NB_ITERATIONS_MAX)){
 
 			m_trace+="Base de règles : \r\n" +
 					baseDeRegle+"\r\n " +
@@ -68,6 +71,7 @@ public class ChainageArriere extends Chainage {
 				}
 			}
 
+			i++;
 			
 			
 		}

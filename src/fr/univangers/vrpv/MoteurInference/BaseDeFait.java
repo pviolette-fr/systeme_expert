@@ -31,8 +31,7 @@ public class BaseDeFait implements List<Fait> {
     public String toString(){
 
         String bdf="";
-
-
+        
         for(Fait fait : m_content){
 
             bdf+=fait.toString()+System.lineSeparator();
