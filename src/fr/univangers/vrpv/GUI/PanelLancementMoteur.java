@@ -70,11 +70,11 @@ public class PanelLancementMoteur extends JPanel {
         c.gridy = 0;
         c.gridwidth = 3;
 
-        this.add(new JLabel("Base de regle"), c);
+        this.add(new JLabel("<html><h3>Base de regle<h3></html>"), c);
 
         c.gridx = 3;
 
-        this.add(new JLabel("Base de Fait"), c);
+        this.add(new JLabel("<html><h3>Base de Fait<h3></html>"), c);
 
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 0;
