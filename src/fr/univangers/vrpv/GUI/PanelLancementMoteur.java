@@ -9,6 +9,7 @@ import java.awt.*;
 public class PanelLancementMoteur extends JPanel {
 
     PanelGestionFait m_panelBaseDeFait;
+    PanelOptionLancement m_panelOptionLancement;
 
     JList<Paquet> m_listPaquet;
     DefaultListModel<Paquet> m_listModelPaquet;
@@ -60,27 +61,33 @@ public class PanelLancementMoteur extends JPanel {
 
         m_listModelPaquet = new DefaultListModel<>();
         m_listPaquet = new JList<>(m_listModelPaquet);
+        m_listPaquet.setCellRenderer(new PaquetCellRenderer());
 
         m_panelBaseDeFait = new PanelGestionFait();
+
+        m_panelOptionLancement = new PanelOptionLancement(controller);
 
         GridBagConstraints c = new GridBagConstraints();
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 0;
-        c.gridwidth = 3;
+        c.gridwidth = 2;
 
         this.add(new JLabel("<html><h3>Base de regle<h3></html>"), c);
 
-        c.gridx = 3;
+        c.gridx = 2;
 
         this.add(new JLabel("<html><h3>Base de Fait<h3></html>"), c);
+
+        c.gridx = 3;
+        this.add(new JLabel("<html><h3>Recherche</h3></html>"), c);
 
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 0;
         c.gridy = 1;
-        c.gridwidth = 3;
-        c.weightx = 3;
+        c.gridwidth = 2;
+        c.weightx = 1;
         c.weighty = 1;
         JScrollPane scrollListPaquet = new JScrollPane(m_listPaquet);
         this.add(scrollListPaquet, c);
@@ -99,11 +106,11 @@ public class PanelLancementMoteur extends JPanel {
         c.gridx = 2;
         this.add(m_deletePaquetButton, c);
 
-        c.gridx = 3;
+        c.gridx = 2;
         c.gridy = 1;
         c.fill = GridBagConstraints.BOTH;
         c.weighty = 1;
-        c.gridheight = 2;
+        c.gridheight = 1;
         this.add(m_panelBaseDeFait, c);
 
 
@@ -131,12 +138,23 @@ public class PanelLancementMoteur extends JPanel {
         c.gridx++;
         this.add(m_saveBdFFile, c);
 
+        c.fill = GridBagConstraints.BOTH;
+        c.gridx = 3;
+        c.gridy = 1;
+        c.gridwidth = 2;
+        c.gridheight = 3;
+        c.weightx = 1;
+        c.weighty = 1;
+
+        this.add(m_panelOptionLancement, c);
+
         m_controller = controller;
         m_controller.setPanelLancementMoteur(this);
     }
 
     public void setListModelPaquet(DefaultListModel<Paquet> listModelPaquet){
         m_listModelPaquet = listModelPaquet;
+        m_listPaquet.setModel(listModelPaquet);
     }
 
     public DefaultListModel<Paquet> getListModelPaquet() {
@@ -145,5 +163,18 @@ public class PanelLancementMoteur extends JPanel {
 
     public PanelGestionFait getPanelBaseDeFait() {
         return m_panelBaseDeFait;
+    }
+
+    public PanelOptionLancement getPanelOptionLancement(){
+        return m_panelOptionLancement;
+    }
+
+    public Paquet selectedPaquet(){
+        return m_listModelPaquet.get(m_listPaquet.getSelectedIndex());
+    }
+
+
+    public int getSelectedPaquetIndex(){
+        return m_listPaquet.getSelectedIndex();
     }
 }

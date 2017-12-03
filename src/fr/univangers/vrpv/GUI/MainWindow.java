@@ -11,12 +11,16 @@ public class MainWindow extends JFrame {
 
     public MainWindow(BaseDeRegle BdR) {
 
-        m_controller = new MoteurController();
+        m_controller = new MoteurController(this, BdR, null);
 
         this.setContentPane(new PanelLancementMoteur(m_controller));
 
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
+
+        m_controller.redoPanel();
+
     }
 
 }

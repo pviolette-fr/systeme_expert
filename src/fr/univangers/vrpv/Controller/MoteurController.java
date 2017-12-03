@@ -1,25 +1,26 @@
 package fr.univangers.vrpv.Controller;
 
+import fr.univangers.vrpv.GUI.MainWindow;
 import fr.univangers.vrpv.GUI.PanelGestionPaquet;
 import fr.univangers.vrpv.GUI.PanelLancementMoteur;
-import fr.univangers.vrpv.MoteurInference.BaseDeFait;
-import fr.univangers.vrpv.MoteurInference.BaseDeRegle;
-import fr.univangers.vrpv.MoteurInference.Fait;
-import fr.univangers.vrpv.MoteurInference.Paquet;
-import fr.univangers.vrpv.MoteurInference.MoteurInferenceIO;
+import fr.univangers.vrpv.MoteurInference.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
-public class MoteurController implements ActionListener{
+public class MoteurController implements ActionListener {
 
     private PanelLancementMoteur m_panelLancementMoteur;
     private PanelGestionPaquet m_panelGestionPaquet;
     private BaseDeRegle m_bdr;
     private BaseDeFait m_bdf;
+    private final MainWindow m_win;
+
+    private int currently_editing;
 
     public static final String ACTION_SAVE_BDR = "save-bdr";
     public static final String ACTION_SAVE_BDF = "save-bdf";
@@ -31,88 +32,168 @@ public class MoteurController implements ActionListener{
     public static final String ACTION_ADD_PAQUET = "add-paquet";
     public static final String ACTION_DELETE_PAQUET = "del-paquet";
 
-    public MoteurController(){
+    public static final String ACTION_START = "start";
 
+    public MoteurController(MainWindow win, BaseDeRegle bdr, BaseDeFait bdf) {
+        m_win = win;
+        if (bdr != null)
+            m_bdr = bdr;
+        else
+            m_bdr = new BaseDeRegle();
+
+        if (bdf != null)
+            m_bdf = bdf;
+        else
+            m_bdf = new BaseDeFait();
     }
 
-    public void setPanelLancementMoteur(PanelLancementMoteur panelLancementMoteur){
+    public void setPanelLancementMoteur(PanelLancementMoteur panelLancementMoteur) {
         m_panelLancementMoteur = panelLancementMoteur;
         redoPanel();
     }
 
-    public void redoPanel(){
-        if(m_bdr != null){
-            DefaultListModel<Paquet> l = new DefaultListModel<>();
-            for(Paquet p : m_bdr){
-                l.addElement(p);
-            }
-            m_panelLancementMoteur.setListModelPaquet(l);
-        }
-        if(m_bdf != null){
-
-            DefaultListModel<Fait> l = new DefaultListModel<>();
-            for(Fait f : m_bdf){
-                l.addElement(f);
-            }
-            m_panelLancementMoteur.getPanelBaseDeFait().setListModele(l);
-        }
+    public void redoPanel() {
+        redoPaquetList();
+        redoFaitList();
     }
 
-    public void redoPaquetList(){
+    public void redoPaquetList() {
         DefaultListModel<Paquet> l = m_panelLancementMoteur.getListModelPaquet();
         l.removeAllElements();
-        for(Paquet p : m_bdr){
+        for (Paquet p : m_bdr) {
             l.addElement(p);
         }
     }
 
-    public void loadBdRFile(String path){
+    public void redoFaitList() {
+        DefaultListModel<Fait> l = m_panelLancementMoteur.getPanelBaseDeFait().getListModele();
+        l.removeAllElements();
+        for (Fait f : m_bdf) {
+            l.addElement(f);
+        }
+    }
+
+    public void loadBdRFile(String path) {
         m_bdr = MoteurInferenceIO.creerBaseDeRegle(path);
         redoPaquetList();
     }
 
-    public void saveBdRFile(String path){
-        try{
+    public void saveBdRFile(String path) {
+        try {
             MoteurInferenceIO.exporterBaseDeRegle(path, m_bdr);
-        }catch (IOException e){
+        } catch (IOException e) {
             System.err.println(e);
         }
     }
 
-    public void loadBdFFile(String path){
-        try{
+    public void loadBdFFile(String path) {
+        try {
             m_bdf = MoteurInferenceIO.importerBaseDeFait(path);
-        }catch(IOException e){
+            redoFaitList();
+        } catch (IOException e) {
             System.err.println(e);
         }
     }
 
-    public void saveBdFFile(String path){
+    public void saveBdFFile(String path) {
         m_bdf = new BaseDeFait(m_panelLancementMoteur.getPanelBaseDeFait().getListFait());
-        try{
+        try {
             MoteurInferenceIO.exporterBaseDeFait(path, m_bdf);
-        }catch(IOException e){
+        } catch (IOException e) {
             System.err.println(e);
         }
+    }
+
+    public void startMoteur(){
+        ModeChainage mCh = m_panelLancementMoteur.getPanelOptionLancement().getModeChainage();
+        Fait but = m_panelLancementMoteur.getPanelOptionLancement().getGoal();
+
+        MoteurGroupementParPaquets moteur = new MoteurGroupementParPaquets(m_bdr, m_bdf, mCh);
+
+        if(moteur.rechercherBut(but)){
+            m_panelLancementMoteur.setBackground(Color.LIGHT_GRAY);
+        }
+        else{
+            m_panelLancementMoteur.setBackground(Color.RED);
+        }
+
+        m_panelLancementMoteur.getPanelOptionLancement().setTrace(moteur.getTraceAbregee());
+    }
+
+    public void editPaquet(){
+        Paquet p = m_panelLancementMoteur.selectedPaquet();
+        m_panelGestionPaquet = new PanelGestionPaquet(this);
+        m_panelGestionPaquet.loadPaquet(p);
+        currently_editing = m_panelLancementMoteur.getSelectedPaquetIndex();
+
+        m_win.setContentPane(m_panelGestionPaquet);
+        m_win.repaint();
+        m_win.setVisible(false);
+        m_win.setVisible(true);
+    }
+
+    public void addPaquet(){
+        Paquet p = m_panelGestionPaquet.getPaquet();
+
+        if(currently_editing != -1)
+            m_panelLancementMoteur.getListModelPaquet().set(currently_editing, p);
+        else
+            m_panelLancementMoteur.getListModelPaquet().addElement(p);
+
+        m_win.setContentPane(m_panelLancementMoteur);
+        m_win.repaint();
+        m_win.setVisible(false);
+        m_win.setVisible(true);
+
+    }
+
+    public void newPaquet(){
+        currently_editing = -1;
+        m_panelGestionPaquet = new PanelGestionPaquet(this);
+
+        m_win.setContentPane(m_panelGestionPaquet);
+        m_win.repaint();
+        m_win.setVisible(false);
+        m_win.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        if(actionEvent.getActionCommand().startsWith("load") || actionEvent.getActionCommand().startsWith("save")){
+        if (actionEvent.getActionCommand().startsWith("load") || actionEvent.getActionCommand().startsWith("save")) {
             JFileChooser chooser = new JFileChooser();
-            int returnValue = chooser.showOpenDialog( null ) ;
-            if( returnValue == JFileChooser.APPROVE_OPTION ) {
-                File file = chooser.getSelectedFile() ;
-                switch (actionEvent.getActionCommand()){
-                    case ACTION_LOAD_BDF : loadBdFFile(file.getAbsolutePath());
-                    break;
-                    case ACTION_LOAD_BDR : loadBdRFile(file.getAbsolutePath());
-                    break;
-                    case ACTION_SAVE_BDF :saveBdFFile(file.getAbsolutePath());
-                    break;
-                    case ACTION_SAVE_BDR : loadBdRFile(file.getAbsolutePath());
-                    break;
+            int returnValue = chooser.showOpenDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File file = chooser.getSelectedFile();
+                switch (actionEvent.getActionCommand()) {
+                    case ACTION_LOAD_BDF:
+                        loadBdFFile(file.getAbsolutePath());
+                        break;
+                    case ACTION_LOAD_BDR:
+                        loadBdRFile(file.getAbsolutePath());
+                        break;
+                    case ACTION_SAVE_BDF:
+                        saveBdFFile(file.getAbsolutePath());
+                        break;
+                    case ACTION_SAVE_BDR:
+                        loadBdRFile(file.getAbsolutePath());
+                        break;
                 }
+            }
+        }
+        else{
+            switch (actionEvent.getActionCommand()){
+                case ACTION_START:
+                    this.startMoteur();
+                    break;
+                case ACTION_EDIT_PAQUET:
+                    editPaquet();
+                    break;
+                case ACTION_NEW_PAQUET:
+                    newPaquet();
+                    break;
+                case ACTION_ADD_PAQUET:
+                    addPaquet();
+                    break;
             }
         }
     }

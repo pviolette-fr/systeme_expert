@@ -9,11 +9,9 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Insets;
 
 public class PanelGestionPaquet extends JPanel implements ActionListener, ListSelectionListener{
 
@@ -54,7 +52,8 @@ public class PanelGestionPaquet extends JPanel implements ActionListener, ListSe
         m_clearRules.addActionListener(this);
         m_clearRules.setActionCommand(ACTION_CLEAR_RULES);
 
-        m_confirmPaquet = new JButton("Ajouter ce paquet à la base de règle");
+        m_confirmPaquet = new JButton("Valider");
+        m_confirmPaquet.setBackground(Color.GREEN);
         m_confirmPaquet.setActionCommand(MoteurController.ACTION_ADD_PAQUET);
         m_confirmPaquet.addActionListener(controller);
 
