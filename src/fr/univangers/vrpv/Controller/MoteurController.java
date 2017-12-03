@@ -115,7 +115,9 @@ public class MoteurController implements ActionListener {
         List<Fait> l = m_panelLancementMoteur.getPanelBaseDeFait().getListFait();
 
         m_bdf = new BaseDeFait(l);
-        MoteurGroupementParPaquets moteur = new MoteurGroupementParPaquets(m_bdr, m_bdf, mCh);
+        BaseDeRegle bdr = new BaseDeRegle(m_bdr);
+        MoteurGroupementParPaquets moteur = new MoteurGroupementParPaquets(bdr, m_bdf, mCh);
+
 
         if(moteur.rechercherBut(but)){
             m_panelLancementMoteur.setBackground(Color.LIGHT_GRAY);

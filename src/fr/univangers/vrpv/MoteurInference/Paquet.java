@@ -7,7 +7,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 
-public class Paquet implements Iterable<Regle> {
+public class Paquet implements Iterable<Regle>, Cloneable {
 
 	static final String JSON_MODE_KEY = "mode";
 	static final String JSON__REGLES_KEY = "regles";
@@ -26,6 +26,11 @@ public class Paquet implements Iterable<Regle> {
 		m_regles = new ArrayList<Regle>(regles);
 		
 	}
+
+	public Paquet(Paquet other){
+	    m_regles = new ArrayList<>(other.m_regles);
+	    m_modeChainagePreferenciel = other.m_modeChainagePreferenciel;
+    }
 
 	public Paquet(List<Regle> regles, ModeChainage modeChainagePreferentielle){
 	    m_regles = new ArrayList<>(regles);
@@ -116,4 +121,9 @@ public class Paquet implements Iterable<Regle> {
     public Spliterator<Regle> spliterator() {
         return m_regles.spliterator();
     }
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return new Paquet(m_regles, m_modeChainagePreferenciel);
+	}
 }

@@ -19,7 +19,7 @@ public abstract class Chainage {
     protected String m_traceAbregee;
 
     public Chainage(Paquet baseDeRegle, BaseDeFait baseDeFait) {
-        m_baseDeRegles = baseDeRegle;
+        m_baseDeRegles = new Paquet(baseDeRegle);
         m_baseDeFaits = baseDeFait;
 
         m_trace = "";

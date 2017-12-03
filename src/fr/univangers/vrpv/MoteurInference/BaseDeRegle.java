@@ -33,7 +33,7 @@ public class BaseDeRegle implements List<Paquet>, JSONAware {
 	}
 	
 	public BaseDeRegle(BaseDeRegle other){
-		m_content = other.m_content;
+		m_content = new LinkedList<>(other.m_content);
 		m_coherenceVar = other.m_coherenceVar;
 	}
 	
