@@ -5,6 +5,9 @@ import fr.univangers.vrpv.GUI.PanelGestionPaquet;
 import fr.univangers.vrpv.GUI.PanelLancementMoteur;
 import fr.univangers.vrpv.MoteurInference.*;
 
+import java.util.List;
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -108,6 +111,10 @@ public class MoteurController implements ActionListener {
         ModeChainage mCh = m_panelLancementMoteur.getPanelOptionLancement().getModeChainage();
         Fait but = m_panelLancementMoteur.getPanelOptionLancement().getGoal();
 
+
+        List<Fait> l = m_panelLancementMoteur.getPanelBaseDeFait().getListFait();
+
+        m_bdf = new BaseDeFait(l);
         MoteurGroupementParPaquets moteur = new MoteurGroupementParPaquets(m_bdr, m_bdf, mCh);
 
         if(moteur.rechercherBut(but)){
