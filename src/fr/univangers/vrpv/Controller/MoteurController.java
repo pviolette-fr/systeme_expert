@@ -126,7 +126,7 @@ public class MoteurController implements ActionListener {
             m_panelLancementMoteur.setBackground(Color.RED);
         }
 
-        m_panelLancementMoteur.getPanelOptionLancement().setTrace(moteur.getTraceAbregee());
+        m_panelLancementMoteur.getPanelOptionLancement().setTrace(moteur.getTrace());
     }
 
     public void editPaquet(){
