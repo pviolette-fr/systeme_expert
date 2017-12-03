@@ -48,9 +48,17 @@ public class Regle {
 	public void addPremisse(String variable, String valeur){
 		m_premisses.add(new Fait(variable,valeur));
 	}
+	
+	public void addPremisses(String variable, String valeur, boolean egal){
+		m_premisses.add(new Fait(variable, valeur, egal));
+	}
 		
 	public void addConclusion(String variable, String valeur){
 		m_conclusions.add(new Fait(variable,valeur));
+	}
+	
+	public void addConclusion(String variable, String valeur, boolean egal){
+		m_conclusions.add(new Fait(variable, valeur, egal));
 	}
 	
 	public List<Fait> getPremisses(){

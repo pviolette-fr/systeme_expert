@@ -80,47 +80,21 @@ public class MoteurGroupementParPaquets {
             m_traceAbregee += c.getTraceAbregee();
             m_baseDefaits = c.getBaseDeFaits();
             
-            if(!estCoherenteBdf()){
+            if(!coherenceUnicite()||!coherenceEgalite()){
             	m_trace+="Attention la base de fait : \r\n"+
             			m_baseDefaits+
             			" n'est pas cohérente.\r\n";
             }
-
         }
         return false;
     }
+
+    /**
+     * Teste si la bdf est cohérente
+     * Si bdf contient {var=val1} et {var=val2} alors @return false
+     */
     
-    public boolean estCoherenteBdr(){
-		Set<String> variablesUniques = m_bdr.getCoherence().keySet();
-		
-		for(Paquet p : m_bdr){
-			
-			for(Regle r : p.getRegles()){
-				
-				for(String varUnique : variablesUniques){
-					
-					int nbApparitions = 0;
-					
-					for(Fait conclusion : r.getConclusion()){
-						
-						if(conclusion.getVar().equals(varUnique)){
-							nbApparitions++;
-						}
-					}
-					
-					if(nbApparitions>1){
-						return false;
-					}
-					
-					
-				}
-				
-			}
-		}
-		return true;
-	}
-	
-	public boolean estCoherenteBdf(){
+	public boolean coherenceUnicite(){
 
 		Set<String> variablesUniques = m_bdr.getCoherence().keySet();
 		
@@ -141,6 +115,27 @@ public class MoteurGroupementParPaquets {
 			}
 		}
 		return true;
+	}
+	
+	/**
+	 * Teste si la bdf est coherente
+	 * Si bdf contient {var=val} et {var!=val} alors @return false
+	 */
+	
+	public boolean coherenceEgalite(){
+		
+		for(Fait f : m_baseDefaits){
+			
+			Fait opposé = new Fait(f.getVar(),f.getVal(),!f.egalite());
+			
+			if(m_baseDefaits.contains(opposé)){
+				return false;
+			}
+			
+		}
+		
+		return true;
+		
 	}
 
     public String getTrace() {

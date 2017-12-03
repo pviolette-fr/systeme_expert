@@ -17,7 +17,7 @@ public class Main {
 				
 		
 		Fait but = new Fait("livre","11/22/63");
-	
+			
 		
 		System.out.println("Choix de la stratégie d'exploitation des règles : ");
 		System.out.println("1: Chainage avant profondeur");
