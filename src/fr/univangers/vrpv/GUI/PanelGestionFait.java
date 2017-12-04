@@ -25,7 +25,7 @@ public class PanelGestionFait extends JPanel implements ActionListener, ListSele
     PanelAjoutFait m_addPanel;
 
     public PanelGestionFait() {
-        this.setLayout(new BorderLayout());
+        this.setLayout(new GridBagLayout());
 
         m_clear = new JButton("Clear");
         m_clear.setActionCommand(CLEAR);
@@ -37,12 +37,28 @@ public class PanelGestionFait extends JPanel implements ActionListener, ListSele
         m_listeFait = new JList<>(m_listModele);
         m_listeFait.addListSelectionListener(this);
 
-        JScrollPane scrollListe = new JScrollPane(m_listeFait);
-        scrollListe.setPreferredSize(new Dimension(100,300));
-        this.add(scrollListe, BorderLayout.CENTER);
+        GridBagConstraints c = new GridBagConstraints();
 
-        this.add(m_addPanel, BorderLayout.NORTH);
-        this.add(m_clear, BorderLayout.SOUTH);    }
+        c.gridy = 0;
+        c.gridx = 0;
+        c.weighty = 1;
+        c.fill = GridBagConstraints.BOTH;
+
+        this.add(m_addPanel, c);
+
+        c.gridy = 1;
+        c.fill = GridBagConstraints.BOTH;
+        c.weighty = 2;
+
+        JScrollPane scrollListe = new JScrollPane(m_listeFait);
+        this.add(scrollListe, c);
+
+        c.gridy = 2;
+        c.weighty = 0;
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+        this.add(m_clear, c);
+    }
 
     public DefaultListModel<Fait> getListModele() {
         return m_listModele;
@@ -54,16 +70,16 @@ public class PanelGestionFait extends JPanel implements ActionListener, ListSele
 
     /**
      * Ajoute le fait donné dans la liste.
+     *
      * @param f le fait à ajouter
      */
-    public void ajouterFait(Fait f){
-        if(f.getVal().length() > 0 && f.getVar().length() > 0){
-            if(m_listeFait.getSelectedIndex() != -1){
+    public void ajouterFait(Fait f) {
+        if (f.getVal().length() > 0 && f.getVar().length() > 0) {
+            if (m_listeFait.getSelectedIndex() != -1) {
                 int pos = m_listeFait.getSelectedIndex();
                 supprimerFaitSelectionne();
                 m_listModele.add(pos, f);
-            }
-            else{
+            } else {
                 m_listModele.addElement(f);
             }
             m_addPanel.clear();
@@ -71,9 +87,9 @@ public class PanelGestionFait extends JPanel implements ActionListener, ListSele
         }
     }
 
-    public List<Fait> getListFait(){
+    public List<Fait> getListFait() {
         List<Fait> l = new LinkedList<>();
-        for(int i = 0; i < m_listModele.size(); ++i){
+        for (int i = 0; i < m_listModele.size(); ++i) {
             l.add(m_listModele.get(i));
         }
         return l;
@@ -81,33 +97,34 @@ public class PanelGestionFait extends JPanel implements ActionListener, ListSele
 
     /**
      * Supprime le Fait à l'indice i dans la liste
+     *
      * @param i l'indice du fait à supprimer
      */
-    public void supprimerFait(int i){
+    public void supprimerFait(int i) {
         System.out.println("Delete" + i);
         m_listModele.removeElementAt(i);
     }
 
-    public void supprimerFaitSelectionne(){
+    public void supprimerFaitSelectionne() {
         int indices[] = m_listeFait.getSelectedIndices();
-        for(int i = indices.length - 1; i >= 0; i--){
+        for (int i = indices.length - 1; i >= 0; i--) {
             supprimerFait(indices[i]);
         }
     }
 
-    public void clear(){
+    public void clear() {
         m_listModele.removeAllElements();
         m_addPanel.clear();
     }
 
-     
+
     public void actionPerformed(ActionEvent actionEvent) {
-        switch (actionEvent.getActionCommand()){
-            case PanelAjoutFait.ADD_FAIT_ACTION :
-                    ajouterFait(m_addPanel.getFait());
+        switch (actionEvent.getActionCommand()) {
+            case PanelAjoutFait.ADD_FAIT_ACTION:
+                ajouterFait(m_addPanel.getFait());
                 break;
             case DELETE_FAIT_ACTION:
-                    supprimerFaitSelectionne();
+                supprimerFaitSelectionne();
                 break;
             case CLEAR:
                 System.out.print("Clear all");
@@ -116,9 +133,9 @@ public class PanelGestionFait extends JPanel implements ActionListener, ListSele
         }
     }
 
-     
+
     public void valueChanged(ListSelectionEvent listSelectionEvent) {
-        if(m_listeFait.getSelectedIndex() != -1){
+        if (m_listeFait.getSelectedIndex() != -1) {
             m_addPanel.setFait(m_listModele.get(m_listeFait.getSelectedIndex()));
         }
     }

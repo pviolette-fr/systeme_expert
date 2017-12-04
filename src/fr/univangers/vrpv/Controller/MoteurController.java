@@ -107,10 +107,19 @@ public class MoteurController implements ActionListener {
         }
     }
 
+    public void redoBdR(){
+        m_bdr = new BaseDeRegle();
+        DefaultListModel<Paquet> l = m_panelLancementMoteur.getListModelPaquet();
+        for(int i = 0; i < l.size(); ++i){
+            m_bdr.add(l.get(i));
+        }
+    }
+
     public void startMoteur(){
         ModeChainage mCh = m_panelLancementMoteur.getPanelOptionLancement().getModeChainage();
         Fait but = m_panelLancementMoteur.getPanelOptionLancement().getGoal();
 
+        redoBdR();
 
         List<Fait> l = m_panelLancementMoteur.getPanelBaseDeFait().getListFait();
 
@@ -123,7 +132,7 @@ public class MoteurController implements ActionListener {
             m_panelLancementMoteur.setBackground(new Color(133, 255, 121));
         }
         else{
-            m_panelLancementMoteur.setBackground(Color.RED);
+            m_panelLancementMoteur.setBackground(new Color(255, 65, 62));
         }
 
         m_panelLancementMoteur.getPanelOptionLancement().setTrace(moteur.getTrace());
@@ -144,8 +153,9 @@ public class MoteurController implements ActionListener {
     public void addPaquet(){
         Paquet p = m_panelGestionPaquet.getPaquet();
 
-        if(currently_editing != -1)
+        if(currently_editing != -1){
             m_panelLancementMoteur.getListModelPaquet().set(currently_editing, p);
+        }
         else
             m_panelLancementMoteur.getListModelPaquet().addElement(p);
 
@@ -153,7 +163,6 @@ public class MoteurController implements ActionListener {
         m_win.repaint();
         m_win.setVisible(false);
         m_win.setVisible(true);
-
     }
 
     public void newPaquet(){
@@ -161,9 +170,12 @@ public class MoteurController implements ActionListener {
         m_panelGestionPaquet = new PanelGestionPaquet(this);
 
         m_win.setContentPane(m_panelGestionPaquet);
-        m_win.repaint();
         m_win.setVisible(false);
         m_win.setVisible(true);
+    }
+
+    public void deletePaquet(){
+        m_panelLancementMoteur.getListModelPaquet().remove(m_panelLancementMoteur.getSelectedPaquetIndex());
     }
 
     @Override
@@ -184,7 +196,7 @@ public class MoteurController implements ActionListener {
                         saveBdFFile(file.getAbsolutePath());
                         break;
                     case ACTION_SAVE_BDR:
-                        loadBdRFile(file.getAbsolutePath());
+                        saveBdRFile(file.getAbsolutePath());
                         break;
                 }
             }
@@ -202,6 +214,9 @@ public class MoteurController implements ActionListener {
                     break;
                 case ACTION_ADD_PAQUET:
                     addPaquet();
+                    break;
+                case ACTION_DELETE_PAQUET:
+                    deletePaquet();
                     break;
             }
         }

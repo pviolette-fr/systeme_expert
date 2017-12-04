@@ -35,9 +35,18 @@ public class Regle {
 	public boolean estApplicable(List<Fait> baseDeFait){
 		boolean estApplicable = true;
 		for(Fait p : m_premisses){
-		
-			if(!baseDeFait.contains(p)){
-				estApplicable=false;
+			boolean found = false;
+			for(int i = 0; i < baseDeFait.size(); ++i){
+				Fait f = baseDeFait.get(i);
+				if(f.getVar().equals(p.getVar()) && f.getVal().equals(p.getVal()) && f.egalite() == p.egalite() && f.getProba() >= p.getProba() ){
+					System.out.println("Applicable [" + f + "] on [" + p + "]" );
+
+					found = true;
+					break;
+				}
+			}
+			if(!found){
+				estApplicable = false;
 				break;
 			}
 		}

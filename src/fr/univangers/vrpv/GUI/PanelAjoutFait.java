@@ -17,6 +17,7 @@ public class PanelAjoutFait extends JPanel implements ItemListener {
     JCheckBox m_egalite;
     JButton m_addButton;
     JLabel m_labelEgalite;
+    JSpinner m_spinnerProba;
 
     public PanelAjoutFait(ActionListener l) {
 
@@ -28,6 +29,8 @@ public class PanelAjoutFait extends JPanel implements ItemListener {
         m_egalite.addItemListener(this);
         m_labelEgalite = new JLabel("=");
 
+        SpinnerModel model = new SpinnerNumberModel(1.0, 0.0, 1.0, 0.05);
+        m_spinnerProba = new JSpinner(model);
 
         GridBagConstraints c = new GridBagConstraints();
 
@@ -58,8 +61,12 @@ public class PanelAjoutFait extends JPanel implements ItemListener {
 
         this.add(m_egalite, c);
 
-        c.gridx = 1;
-        c.gridwidth = 2;
+        c.gridx = 2;
+        this.add(m_spinnerProba, c);
+
+        c.gridy = 2;
+        c.gridx = 0;
+        c.gridwidth = 3;
         m_addButton = new JButton("Ajouter");
         m_addButton.setActionCommand(ADD_FAIT_ACTION);
         m_addButton.addActionListener(l);
@@ -71,7 +78,7 @@ public class PanelAjoutFait extends JPanel implements ItemListener {
     }
 
     public Fait getFait() {
-        return new Fait(m_varField.getText(), m_valueField.getText(), m_egalite.isSelected());
+        return new Fait(m_varField.getText(), m_valueField.getText(), m_egalite.isSelected(),(double)m_spinnerProba.getValue());
     }
 
     public void setFait(Fait f) {

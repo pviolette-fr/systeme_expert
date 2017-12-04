@@ -49,8 +49,8 @@ public class ChainageAvantLargeur extends ChainageAvant {
 				}
 				
 				if(m_baseDeFaits.contains(but)){
-					m_trace+="SUCCES\r\n";
-					m_traceAbregee+="SUCCES\r\n";
+					m_trace+="SUCCES avec Proba " + m_baseDeFaits.get(m_baseDeFaits.indexOf(but)).getProba();
+					m_traceAbregee+="SUCCES avec Proba " + m_baseDeFaits.get(m_baseDeFaits.indexOf(but)).getProba();
 					return true;
 				}
 				else{

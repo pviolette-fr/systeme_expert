@@ -44,12 +44,13 @@ public class ChainageArriere extends Chainage {
 			ArrayList<Regle> reglesValides = new ArrayList<Regle>();
 			
 			for(Regle r : baseDeRegle.getRegles()){
-				
-				if(propositionsRecherchees.containsAll(r.getConclusion())){
-					reglesValides.add(r);
-					m_trace+="Règle dont la conclusion est une proposition recherchée : "+r+"\r\n";
+				for(Fait f : r.getConclusion()){
+					if(propositionsRecherchees.contains(f)){
+						reglesValides.add(r);
+						m_trace+="Règle dont la conclusion est une proposition recherchée : "+r+"\r\n";
+						break;
+					}
 				}
-				
 			}
 			
 			if(reglesValides.isEmpty()){
@@ -77,7 +78,8 @@ public class ChainageArriere extends Chainage {
 		}
 		
 		if(m_baseDeFaits.contains(but)){
-			m_trace+="SUCCES";
+			m_trace+="SUCCES avec Proba " + m_baseDeFaits.get(m_baseDeFaits.indexOf(but)).getProba();
+			m_traceAbregee+="SUCCES avec Proba " + m_baseDeFaits.get(m_baseDeFaits.indexOf(but)).getProba();
 			return true;
 		}
 		else{

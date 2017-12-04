@@ -72,7 +72,7 @@ public class BaseDeRegle implements List<Paquet>, JSONAware {
         }
 
         json.put(JSON_PAQUETS_KEY, paquets);
-
+		json.put(JSON_COHERENCE_KEY, m_coherenceVar);
         return json;
     }
 
