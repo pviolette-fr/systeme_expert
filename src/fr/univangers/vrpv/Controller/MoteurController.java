@@ -120,7 +120,7 @@ public class MoteurController implements ActionListener {
 
 
         if(moteur.rechercherBut(but)){
-            m_panelLancementMoteur.setBackground(Color.LIGHT_GRAY);
+            m_panelLancementMoteur.setBackground(new Color(133, 255, 121));
         }
         else{
             m_panelLancementMoteur.setBackground(Color.RED);
